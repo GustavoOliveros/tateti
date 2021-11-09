@@ -41,6 +41,7 @@ function cargarJuegos(){
 }
 
 /**
+<<<<<<< HEAD
  * Agrega el arreglo resultante de una partida al arreglo que almacena todos los juegos
  * @param array $juegosJugados
  * @param array $juegoNuevo
@@ -60,6 +61,27 @@ function agregarJuegos($juegosJugados, $juegoNuevo){
     return $coleccionNueva;
 }
 
+=======
+ * Solicita al usuario un número de opcion de menu
+ * @return int 
+ */
+function menu()
+{
+    //int $opcion
+    echo "
+    1) Jugar al tateti		
+    2) Mostrar un juego		
+    3) Mostrar el primer juego ganador		
+    4) Mostrar porcentaje de Juegos ganados		
+    5) Mostrar resumen de Jugador		
+    6) Mostrar listado de juegos Ordenado por jugador O		
+    7) salir \n";	
+
+    echo"Seleccione una opcion de menu: \n";
+    $opcion = trim(fgets(STDIN));
+    return $opcion;
+}
+>>>>>>> b530d8fa4505b854113b764ac3526afedd278a44
 
 
 
@@ -87,7 +109,8 @@ $coleccionDeJuegos = agregarJuegos($coleccionDeJuegos, $juego);
 print_r($coleccionDeJuegos);
 //imprimirResultado($juego);
 
-
+// Apartado del menu de opciones 
+$opcionDeMenu = menu();//Arreglar posicion cuando sea utilizado
 
 /*
 do {
