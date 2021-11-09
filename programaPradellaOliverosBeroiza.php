@@ -41,7 +41,6 @@ function cargarJuegos(){
 }
 
 /**
-<<<<<<< HEAD
  * Agrega el arreglo resultante de una partida al arreglo que almacena todos los juegos
  * @param array $juegosJugados
  * @param array $juegoNuevo
@@ -61,7 +60,7 @@ function agregarJuegos($juegosJugados, $juegoNuevo){
     return $coleccionNueva;
 }
 
-=======
+/**
  * Solicita al usuario un número de opcion de menu
  * @return int 
  */
@@ -81,7 +80,6 @@ function menu()
     $opcion = trim(fgets(STDIN));
     return $opcion;
 }
->>>>>>> b530d8fa4505b854113b764ac3526afedd278a44
 
 
 
@@ -100,13 +98,12 @@ function menu()
 
 // Precargamos 10 juegos
 $coleccionDeJuegos = cargarJuegos();
-print_r($coleccionDeJuegos);
 
 // El resultado de la función jugar se guarda y luego se agrega a la colección mediante agregarJuegos
 $juego = jugar();
 $coleccionDeJuegos = agregarJuegos($coleccionDeJuegos, $juego);
 
-print_r($coleccionDeJuegos);
+//print_r($coleccionDeJuegos);
 //imprimirResultado($juego);
 
 // Apartado del menu de opciones 
