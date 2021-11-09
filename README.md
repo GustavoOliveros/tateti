@@ -14,3 +14,5 @@ Juego de tateti desarrollado en Introducción a la Programación (FAI) en PHP.
 
  - **Nicolás Pradella** - legajo 3727 - mail:roberto.pradella@est.fi.uncoma.edu.ar - usuario github: NPradella
 
+ - **Santiago Beroiza** - legajo 2594 - mail:santiago.beroiza@est.fi.uncoma.edu.ar - usuario github: BeroizaSantiago
+
