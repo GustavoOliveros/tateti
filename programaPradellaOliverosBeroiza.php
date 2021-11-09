@@ -18,7 +18,27 @@ include_once("tateti.php");
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
 
+/**
+ * Crea e inicializa una colección de 10 juegos
+ * @return array arreglo indexado de arreglos asociativos
+ */
+function cargarJuegos(){
+    // array $juegosCargados
 
+    // 10 juegos generados para hacer la precarga
+    $juegosCargados[0] = ["jugadorCruz" => "bautista", "jugadorCirculo" => "pepe", "puntosCruz" => 3, "puntosCirculo" => 0];
+    $juegosCargados[1] = ["jugadorCruz" => "enrique", "jugadorCirculo" => "bautista", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[2] = ["jugadorCruz" => "maria", "jugadorCirculo" => "pepe", "puntosCruz" => 0, "puntosCirculo" => 5];
+    $juegosCargados[3] = ["jugadorCruz" => "sofia", "jugadorCirculo" => "maria", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[4] = ["jugadorCruz" => "pepe", "jugadorCirculo" => "bautista", "puntosCruz" => 5, "puntosCirculo" => 0];
+    $juegosCargados[5] = ["jugadorCruz" => "bautista", "jugadorCirculo" => "maria", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[6] = ["jugadorCruz" => "maria", "jugadorCirculo" => "pepe", "puntosCruz" => 0, "puntosCirculo" => 4];
+    $juegosCargados[7] = ["jugadorCruz" => "sofia", "jugadorCirculo" => "pepe", "puntosCruz" => 2, "puntosCirculo" => 0];
+    $juegosCargados[8] = ["jugadorCruz" => "pepe", "jugadorCirculo" => "maria", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[9] = ["jugadorCruz" => "bautista", "jugadorCirculo" => "pepe", "puntosCruz" => 0, "puntosCirculo" => 3];
+
+    return $juegosCargados;
+}
 
 
 
@@ -30,15 +50,18 @@ include_once("tateti.php");
 /**************************************/
 
 //Declaración de variables:
-
+// array $coleccionDeJuegos
 
 //Inicialización de variables:
 
 
 //Proceso:
 
-$juego = jugar();
-//print_r($juego);
+// Precargamos 10 juegos
+$coleccionDeJuegos = cargarJuegos(); 
+
+$coleccionDeJuegos[10] = jugar(); //modificar/ eliminar al implementar funcion agregarJuegos
+//print_r($coleccionDeJuegos);
 //imprimirResultado($juego);
 
 
