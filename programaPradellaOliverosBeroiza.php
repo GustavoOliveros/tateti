@@ -40,7 +40,26 @@ function cargarJuegos(){
     return $juegosCargados;
 }
 
+/**
+ * Solicita al usuario un número de opcion de menu
+ * @return int 
+ */
+function menu()
+{
+    //int $opcion
+    echo "
+    1) Jugar al tateti		
+    2) Mostrar un juego		
+    3) Mostrar el primer juego ganador		
+    4) Mostrar porcentaje de Juegos ganados		
+    5) Mostrar resumen de Jugador		
+    6) Mostrar listado de juegos Ordenado por jugador O		
+    7) salir \n";	
 
+    echo"Seleccione una opcion de menu: \n";
+    $opcion = trim(fgets(STDIN));
+    return $opcion;
+}
 
 
 
@@ -64,7 +83,8 @@ $coleccionDeJuegos[10] = jugar(); //modificar/ eliminar al implementar funcion a
 //print_r($coleccionDeJuegos);
 //imprimirResultado($juego);
 
-
+// Apartado del menu de opciones 
+$opcionDeMenu = menu();//Arreglar posicion cuando sea utilizado
 
 /*
 do {
