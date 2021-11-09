@@ -11,3 +11,6 @@ Juego de tateti desarrollado en Introducción a la Programación (FAI) en PHP.
  ## Integrantes del grupo
 
  - **Gustavo Oliveros** - legajo 3621 - mail:gustavo.oliveros@est.fi.uncoma.edu.ar - usuario github: GustavoOliveros
+
+ - **Nicolás Pradella** - legajo 3727 - mail:roberto.pradella@est.fi.uncoma.edu.ar - usuario github: NPradella
+
