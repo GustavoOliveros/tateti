@@ -67,17 +67,19 @@ function agregarJuegos($juegosJugados, $juegoNuevo){
 function menu()
 {
     //int $opcion
-    echo "
-    1) Jugar al tateti		
-    2) Mostrar un juego		
-    3) Mostrar el primer juego ganador		
-    4) Mostrar porcentaje de Juegos ganados		
-    5) Mostrar resumen de Jugador		
-    6) Mostrar listado de juegos Ordenado por jugador O		
-    7) salir \n";	
+    do{
+        echo "
+        1) Jugar al tateti		
+        2) Mostrar un juego		
+        3) Mostrar el primer juego ganador		
+        4) Mostrar porcentaje de Juegos ganados		
+        5) Mostrar resumen de Jugador		
+        6) Mostrar listado de juegos Ordenado por jugador O		
+        7) salir \n";	
 
-    echo"Seleccione una opcion de menu: \n";
-    $opcion = trim(fgets(STDIN));
+        echo"Seleccione una opcion de menu: \n";
+        $opcion = trim(fgets(STDIN));
+    } while(!($opcion > 0) || !($opcion <= 7));
     return $opcion;
 }
 
@@ -89,7 +91,7 @@ function menu()
 /**************************************/
 
 //Declaración de variables:
-// array $coleccionDeJuegos
+// array $coleccionDeJuegos, $juego, integer $opcionDeMenu
 
 //Inicialización de variables:
 
@@ -99,15 +101,18 @@ function menu()
 // Precargamos 10 juegos
 $coleccionDeJuegos = cargarJuegos();
 
+// Mostramos menu
+$opcionDeMenu = menu();
+
+// --arreglar posicion al implementar el switch 
 // El resultado de la función jugar se guarda y luego se agrega a la colección mediante agregarJuegos
 $juego = jugar();
 $coleccionDeJuegos = agregarJuegos($coleccionDeJuegos, $juego);
+// print_r($coleccionDeJuegos);
+// --
 
 //print_r($coleccionDeJuegos);
 //imprimirResultado($juego);
-
-// Apartado del menu de opciones 
-$opcionDeMenu = menu();//Arreglar posicion cuando sea utilizado
 
 /*
 do {
