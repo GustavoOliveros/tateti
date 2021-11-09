@@ -26,20 +26,39 @@ function cargarJuegos(){
     // array $juegosCargados
 
     // 10 juegos generados para hacer la precarga
-    $juegosCargados[0] = ["jugadorCruz" => "bautista", "jugadorCirculo" => "pepe", "puntosCruz" => 3, "puntosCirculo" => 0];
-    $juegosCargados[1] = ["jugadorCruz" => "enrique", "jugadorCirculo" => "bautista", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $juegosCargados[2] = ["jugadorCruz" => "maria", "jugadorCirculo" => "pepe", "puntosCruz" => 0, "puntosCirculo" => 5];
-    $juegosCargados[3] = ["jugadorCruz" => "sofia", "jugadorCirculo" => "maria", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $juegosCargados[4] = ["jugadorCruz" => "pepe", "jugadorCirculo" => "bautista", "puntosCruz" => 5, "puntosCirculo" => 0];
-    $juegosCargados[5] = ["jugadorCruz" => "bautista", "jugadorCirculo" => "maria", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $juegosCargados[6] = ["jugadorCruz" => "maria", "jugadorCirculo" => "pepe", "puntosCruz" => 0, "puntosCirculo" => 4];
-    $juegosCargados[7] = ["jugadorCruz" => "sofia", "jugadorCirculo" => "pepe", "puntosCruz" => 2, "puntosCirculo" => 0];
-    $juegosCargados[8] = ["jugadorCruz" => "pepe", "jugadorCirculo" => "maria", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $juegosCargados[9] = ["jugadorCruz" => "bautista", "jugadorCirculo" => "pepe", "puntosCruz" => 0, "puntosCirculo" => 3];
+    $juegosCargados[1] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "PEPE", "puntosCruz" => 3, "puntosCirculo" => 0];
+    $juegosCargados[2] = ["jugadorCruz" => "ENRIQUE", "jugadorCirculo" => "BAUTISTA", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[3] = ["jugadorCruz" => "MARIA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 5];
+    $juegosCargados[4] = ["jugadorCruz" => "SOFIA", "jugadorCirculo" => "MARIA", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[5] = ["jugadorCruz" => "PEPE", "jugadorCirculo" => "BAUTISTA", "puntosCruz" => 5, "puntosCirculo" => 0];
+    $juegosCargados[6] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "MARIA", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[7] = ["jugadorCruz" => "MARIA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 4];
+    $juegosCargados[8] = ["jugadorCruz" => "SOFIA", "jugadorCirculo" => "PEPE", "puntosCruz" => 2, "puntosCirculo" => 0];
+    $juegosCargados[9] = ["jugadorCruz" => "PEPE", "jugadorCirculo" => "MARIA", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[10] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 3];
 
     return $juegosCargados;
 }
 
+/**
+ * Agrega el arreglo resultante de una partida al arreglo que almacena todos los juegos
+ * @param array $juegosJugados
+ * @param array $juegoNuevo
+ * @return array arreglo indexado de arreglos asociativos
+ */
+function agregarJuegos($juegosJugados, $juegoNuevo){
+    // int $cantJuegosJugados, array $coleccionNueva
+
+    // Se obtiene la cantidad de elementos mediante la función count
+    $cantJuegosJugados = count($juegosJugados);
+
+    // Se agrega el juego nuevo en la posición siguiente a la última (obtenida por la función count)
+    $cantJuegosJugados = $cantJuegosJugados + 1;
+    $coleccionNueva = $juegosJugados;
+    $coleccionNueva[$cantJuegosJugados] = $juegoNuevo;
+
+    return $coleccionNueva;
+}
 
 
 
@@ -58,10 +77,14 @@ function cargarJuegos(){
 //Proceso:
 
 // Precargamos 10 juegos
-$coleccionDeJuegos = cargarJuegos(); 
+$coleccionDeJuegos = cargarJuegos();
+print_r($coleccionDeJuegos);
 
-$coleccionDeJuegos[10] = jugar(); //modificar/ eliminar al implementar funcion agregarJuegos
-//print_r($coleccionDeJuegos);
+// El resultado de la función jugar se guarda y luego se agrega a la colección mediante agregarJuegos
+$juego = jugar();
+$coleccionDeJuegos = agregarJuegos($coleccionDeJuegos, $juego);
+
+print_r($coleccionDeJuegos);
 //imprimirResultado($juego);
 
 
