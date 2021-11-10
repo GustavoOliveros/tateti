@@ -26,16 +26,16 @@ function cargarJuegos(){
     // array $juegosCargados
 
     // 10 juegos generados para hacer la precarga
-    $juegosCargados[1] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "PEPE", "puntosCruz" => 3, "puntosCirculo" => 0];
-    $juegosCargados[2] = ["jugadorCruz" => "ENRIQUE", "jugadorCirculo" => "BAUTISTA", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $juegosCargados[3] = ["jugadorCruz" => "MARIA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 5];
-    $juegosCargados[4] = ["jugadorCruz" => "SOFIA", "jugadorCirculo" => "MARIA", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $juegosCargados[5] = ["jugadorCruz" => "PEPE", "jugadorCirculo" => "BAUTISTA", "puntosCruz" => 5, "puntosCirculo" => 0];
-    $juegosCargados[6] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "MARIA", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $juegosCargados[7] = ["jugadorCruz" => "MARIA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 4];
-    $juegosCargados[8] = ["jugadorCruz" => "SOFIA", "jugadorCirculo" => "PEPE", "puntosCruz" => 2, "puntosCirculo" => 0];
-    $juegosCargados[9] = ["jugadorCruz" => "PEPE", "jugadorCirculo" => "MARIA", "puntosCruz" => 1, "puntosCirculo" => 1];
-    $juegosCargados[10] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 3];
+    $juegosCargados[0] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "PEPE", "puntosCruz" => 3, "puntosCirculo" => 0];
+    $juegosCargados[1] = ["jugadorCruz" => "ENRIQUE", "jugadorCirculo" => "BAUTISTA", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[2] = ["jugadorCruz" => "MARIA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 5];
+    $juegosCargados[3] = ["jugadorCruz" => "SOFIA", "jugadorCirculo" => "MARIA", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[4] = ["jugadorCruz" => "PEPE", "jugadorCirculo" => "BAUTISTA", "puntosCruz" => 5, "puntosCirculo" => 0];
+    $juegosCargados[5] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "MARIA", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[6] = ["jugadorCruz" => "MARIA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 4];
+    $juegosCargados[7] = ["jugadorCruz" => "SOFIA", "jugadorCirculo" => "PEPE", "puntosCruz" => 2, "puntosCirculo" => 0];
+    $juegosCargados[8] = ["jugadorCruz" => "PEPE", "jugadorCirculo" => "MARIA", "puntosCruz" => 1, "puntosCirculo" => 1];
+    $juegosCargados[9] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 3];
 
     return $juegosCargados;
 }
@@ -53,7 +53,6 @@ function agregarJuegos($juegosJugados, $juegoNuevo){
     $cantJuegosJugados = count($juegosJugados);
 
     // Se agrega el juego nuevo en la posición siguiente a la última (obtenida por la función count)
-    $cantJuegosJugados = $cantJuegosJugados + 1;
     $coleccionNueva = $juegosJugados;
     $coleccionNueva[$cantJuegosJugados] = $juegoNuevo;
 
@@ -98,10 +97,10 @@ function mostrarJuego ($totalJuegosCargados){
     do {
         echo "Ingrese el numero de juego: ";
         $nj = trim(fgets(STDIN));
-        if (!($nj >= 1) || !($nj <= $cantJuegos)){ //Alternativa para mostrar mensaje de error
+        if (!($nj >= 0) || !($nj <= $cantJuegos)){ //Alternativa para mostrar mensaje de error
             echo "ERROR! el numero de juego ingresado no existe! Por favor ingrese un numero de juego valido. \n";
         }
-    } while (!($nj >= 1) || !($nj <= $cantJuegos)); //Repetitiva para la validacion unicamente para la primera parte
+    } while (!($nj >= 0) || !($nj <= $cantJuegos)); //Repetitiva para la validacion unicamente para la primera parte
 
     //Alternativa con else completamente eliminada ya que quedo sin funcionalidad
     echo "**********************\n";
