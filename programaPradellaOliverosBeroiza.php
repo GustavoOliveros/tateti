@@ -89,26 +89,26 @@ siguiente formato:
  */
 
  /** Mostrar un Juego: Se le solicita al usuario un número de juego y se muestra el resultado en pantalla
-  * @param array $juegosCargados
+  * @param array $totalJuegosCargados
   */
-  function mostrarJuego ($juegosCargados){
+  function mostrarJuego ($totalJuegosCargados){
     //int $nj $cantJuegos
-    $cantJuegos = count($juegosCargados);
+    $cantJuegos = count($totalJuegosCargados);
     do {
         echo "Ingrese el numero de juego: ";
         $nj = trim(fgets(STDIN));
         if ($nj >= 0 || $nj <= $cantJuegos){
             echo "**********************\n";
-            if ($juegosCargados[$nj]["puntosCruz"] > $juegosCargados[$nj]["puntosCirculo"]) {
+            if ($totalJuegosCargados[$nj]["puntosCruz"] > $totalJuegosCargados[$nj]["puntosCirculo"]) {
                 echo "Juego TATETI" . $nj . "(ganó X) \n";
-            } elseif ($juegosCargados[$nj]["puntosCruz"] < $juegosCargados[$nj]["puntosCirculo"]) {
+            } elseif ($totalJuegosCargados[$nj]["puntosCruz"] < $totalJuegosCargados[$nj]["puntosCirculo"]) {
                 echo "Juego TATETI" . $nj . "(ganó O) \n";
             } else {
                 echo "Juego TATETI" . $nj . "(empate) \n";
             }
-            echo "Jugador X" . $juegosCargados[$nj]["jugadorCruz"] . " obtuvo " . $juegosCargados[$nj]["puntosCruz"] . " puntos. \n";
+            echo "Jugador X" . $totalJuegosCargados[$nj]["jugadorCruz"] . " obtuvo " . $totalJuegosCargados[$nj]["puntosCruz"] . " puntos. \n";
         
-            echo "Jugador O" . $juegosCargados[$nj]["jugadorCirculo"] . " obtuvo " . $juegosCargados[$nj]["puntosCirculo"] . " puntos. \n";
+            echo "Jugador O" . $totalJuegosCargados[$nj]["jugadorCirculo"] . " obtuvo " . $totalJuegosCargados[$nj]["puntosCirculo"] . " puntos. \n";
         
             echo "**********************\n";
         }else{
