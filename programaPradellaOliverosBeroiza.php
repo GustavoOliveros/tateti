@@ -118,7 +118,9 @@ $coleccionDeJuegos = agregarJuegos($coleccionDeJuegos, $juego);
 do {
     $opcion = ...;
 
-    
+    //la instrucción switch se utiliza cuando se quiere comparar una misma variable (o expresión) con muchos valores diferentes, 
+    y ejecutar una parte de código distinta dependiendo de a que valor es igual.
+
     switch ($opcion) {
         case 1: 
             //completar qué secuencia de pasos ejecutar si el usuario elige la opción 1
