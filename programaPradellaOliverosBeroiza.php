@@ -103,6 +103,7 @@ function mostrarJuego ($totalJuegosCargados){
     do {
         echo "Ingrese el numero de juego: ";
         $nj = trim(fgets(STDIN));
+        // podriamos hacer $nj = $nj - 1; para que el usuario ingrese juego 1 y lea el indice 0
         if (!($nj >= 0) || !($nj <= $cantJuegos)){ //Alternativa para mostrar mensaje de error
             echo "ERROR! el numero de juego ingresado no existe! Por favor ingrese un numero de juego valido. \n";
         }
@@ -110,6 +111,8 @@ function mostrarJuego ($totalJuegosCargados){
 
     //Alternativa con else completamente eliminada ya que quedo sin funcionalidad
     echo "**********************\n";
+    // para los echos que imprimen el resultado, lo que podiamos hacer es volver a sumar el 1 que restamos
+    // y muestre el valor que ingreso el usuario en un principio
     if ($totalJuegosCargados[$nj]["puntosCruz"] > $totalJuegosCargados[$nj]["puntosCirculo"]) {
         echo "Juego TATETI: " . $nj . " (ganó X) \n";
     } elseif ($totalJuegosCargados[$nj]["puntosCruz"] < $totalJuegosCargados[$nj]["puntosCirculo"]) {
