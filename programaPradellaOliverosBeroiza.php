@@ -104,10 +104,10 @@ function mostrarJuego ($totalJuegosCargados){
         echo "Ingrese el numero de juego: ";
         $nj = trim(fgets(STDIN));
         // podriamos hacer $nj = $nj - 1; para que el usuario ingrese juego 1 y lea el indice 0
-        if (!($nj >= 0) || !($nj <= $cantJuegos)){ //Alternativa para mostrar mensaje de error
+        if (!($nj >= 0) || !($nj < $cantJuegos)){ //Alternativa para mostrar mensaje de error
             echo "ERROR! el numero de juego ingresado no existe! Por favor ingrese un numero de juego valido. \n";
         }
-    } while (!($nj >= 0) || !($nj <= $cantJuegos)); //Repetitiva para la validacion unicamente para la primera parte
+    } while (!($nj >= 0) || !($nj < $cantJuegos)); //Repetitiva para la validacion unicamente para la primera parte
 
     //Alternativa con else completamente eliminada ya que quedo sin funcionalidad
     echo "**********************\n";
