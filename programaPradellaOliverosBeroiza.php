@@ -84,7 +84,42 @@ function menu()
 }
 
 
+/* Mostrar un Juego: Se le solicita al usuario un número de juego y se muestra en pantalla con el
+siguiente formato:
+Juego TATETI: <numero> (<empate| gano X | gano 0>)
+Jugador X: <nombre> obtuvo <puntaje> puntos
+Jugador 0: <nombre> obtuvo <puntaje> puntos
+ */
 
+ /**
+  * @param array $juegosCargados
+  */
+  function mostrarJuego ($juegosCargados){
+    //int $nj $cantJuegos
+    $cantJuegos = count($juegosCargados);
+    do {
+        echo "Ingrese el numero de juego: ";
+        $nj = trim(fgets(STDIN));
+        if ($nj >= 0 || $nj <= $cantJuegos){
+            echo "**********************\n";
+            if ($juegosCargados[$nj]["puntosCruz"] > $juegosCargados[$nj]["puntosCirculo"]) {
+                echo "Juego TATETI" . $nj . "(ganó X) \n";
+            } elseif ($juegosCargados[$nj]["puntosCruz"] < $juegosCargados[$nj]["puntosCirculo"]) {
+                echo "Juego TATETI" . $nj . "(ganó O) \n";
+            } else {
+                echo "Juego TATETI" . $nj . "(empate) \n";
+            }
+            echo "Jugador X" . $juegosCargados[$nj]["jugadorCruz"] . " obtuvo " . $juegosCargados[$nj]["puntosCruz"] . " puntos. \n";
+        
+            echo "Jugador O" . $juegosCargados[$nj]["jugadorCirculo"] . " obtuvo " . $juegosCargados[$nj]["puntosCirculo"] . " puntos. \n";
+        
+            echo "**********************\n";
+        }else{
+            echo "ERROR! el numero de juego ingresado no existe! Por favor ingrese un numero de juego valido: ";
+        }
+    } while (!($nj >= 0 || $nj <= $cantJuegos));
+    
+}
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
