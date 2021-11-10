@@ -63,10 +63,10 @@ function agregarJuegos($juegosJugados, $juegoNuevo){
  * Solicita al usuario un número de opcion de menu
  * @return int 
  */
-function menu()
+function seleccionarOpcion()
 {
-    //int $opcion
-    do{
+    //int $opcion boolean $condicion
+    $condicion = false;
         echo "
         1) Jugar al tateti		
         2) Mostrar un juego		
@@ -75,10 +75,16 @@ function menu()
         5) Mostrar resumen de Jugador		
         6) Mostrar listado de juegos Ordenado por jugador O		
         7) salir \n";	
-
+    do{
         echo"Seleccione una opcion de menu: \n";
         $opcion = trim(fgets(STDIN));
-    } while(!($opcion > 0) || !($opcion <= 7));
+        if($opcion > 0 && $opcion <= 7){
+            $condicion = true;
+        }else{
+            echo "Opcion invalida\n";
+        }
+        
+    } while($condicion == false);
     return $opcion;
 }
 
@@ -134,7 +140,7 @@ function mostrarJuego ($totalJuegosCargados){
 $coleccionDeJuegos = cargarJuegos();
 
 // Mostramos menu
-$opcionDeMenu = menu();
+$opcionDeMenu = seleccionarOpcion();
 
 // --arreglar posicion al implementar el switch 
 // El resultado de la función jugar se guarda y luego se agrega a la colección mediante agregarJuegos
