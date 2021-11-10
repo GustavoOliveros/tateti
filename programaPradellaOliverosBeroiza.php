@@ -88,34 +88,35 @@ function menu()
 siguiente formato:
  */
 
- /** Mostrar un Juego: Se le solicita al usuario un número de juego y se muestra el resultado en pantalla
-  * @param array $totalJuegosCargados
-  */
-  function mostrarJuego ($totalJuegosCargados){
-    //int $nj $cantJuegos
+/**
+ * Mostrar un Juego: Se le solicita al usuario un número de juego y se muestra el resultado en pantalla
+ * @param array $totalJuegosCargados
+ */
+function mostrarJuego ($totalJuegosCargados){
+    //int $nj, $cantJuegos
     $cantJuegos = count($totalJuegosCargados);
     do {
         echo "Ingrese el numero de juego: ";
         $nj = trim(fgets(STDIN));
-        if ($nj >= 1 || $nj <= $cantJuegos){
-            echo "**********************\n";
-            if ($totalJuegosCargados[$nj]["puntosCruz"] > $totalJuegosCargados[$nj]["puntosCirculo"]) {
-                echo "Juego TATETI" . $nj . "(ganó X) \n";
-            } elseif ($totalJuegosCargados[$nj]["puntosCruz"] < $totalJuegosCargados[$nj]["puntosCirculo"]) {
-                echo "Juego TATETI" . $nj . "(ganó O) \n";
-            } else {
-                echo "Juego TATETI" . $nj . "(empate) \n";
-            }
-            echo "Jugador X" . $totalJuegosCargados[$nj]["jugadorCruz"] . " obtuvo " . $totalJuegosCargados[$nj]["puntosCruz"] . " puntos. \n";
-        
-            echo "Jugador O" . $totalJuegosCargados[$nj]["jugadorCirculo"] . " obtuvo " . $totalJuegosCargados[$nj]["puntosCirculo"] . " puntos. \n";
-        
-            echo "**********************\n";
-        }else{
-            echo "ERROR! el numero de juego ingresado no existe! Por favor ingrese un numero de juego valido: ";
+        if (!($nj >= 1) || !($nj <= $cantJuegos)){ //Alternativa para mostrar mensaje de error
+            echo "ERROR! el numero de juego ingresado no existe! Por favor ingrese un numero de juego valido. \n";
         }
-    } while (!($nj >= 1 || $nj <= $cantJuegos));
+    } while (!($nj >= 1) || !($nj <= $cantJuegos)); //Repetitiva para la validacion unicamente para la primera parte
+
+    //Alternativa con else completamente eliminada ya que quedo sin funcionalidad
+    echo "**********************\n";
+    if ($totalJuegosCargados[$nj]["puntosCruz"] > $totalJuegosCargados[$nj]["puntosCirculo"]) {
+        echo "Juego TATETI: " . $nj . " (ganó X) \n";
+    } elseif ($totalJuegosCargados[$nj]["puntosCruz"] < $totalJuegosCargados[$nj]["puntosCirculo"]) {
+        echo "Juego TATETI: " . $nj . " (ganó O) \n";
+    } else {
+        echo "Juego TATETI: " . $nj . " (empate) \n";
+    }
+    echo "Jugador X: " . $totalJuegosCargados[$nj]["jugadorCruz"] . " obtuvo " . $totalJuegosCargados[$nj]["puntosCruz"] . " puntos. \n";
     
+    echo "Jugador O: " . $totalJuegosCargados[$nj]["jugadorCirculo"] . " obtuvo " . $totalJuegosCargados[$nj]["puntosCirculo"] . " puntos. \n";
+    
+    echo "**********************\n";
 }
 
 /**************************************/
@@ -140,6 +141,7 @@ $opcionDeMenu = menu();
 // El resultado de la función jugar se guarda y luego se agrega a la colección mediante agregarJuegos
 $juego = jugar();
 $coleccionDeJuegos = agregarJuegos($coleccionDeJuegos, $juego);
+mostrarJuego($coleccionDeJuegos);
 // print_r($coleccionDeJuegos);
 // --
 
