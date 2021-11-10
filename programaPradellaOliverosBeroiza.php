@@ -84,14 +84,11 @@ function menu()
 }
 
 
-/* Mostrar un Juego: Se le solicita al usuario un número de juego y se muestra en pantalla con el
+/*  con el
 siguiente formato:
-Juego TATETI: <numero> (<empate| gano X | gano 0>)
-Jugador X: <nombre> obtuvo <puntaje> puntos
-Jugador 0: <nombre> obtuvo <puntaje> puntos
  */
 
- /**
+ /** Mostrar un Juego: Se le solicita al usuario un número de juego y se muestra el resultado en pantalla
   * @param array $juegosCargados
   */
   function mostrarJuego ($juegosCargados){
