@@ -97,7 +97,7 @@ siguiente formato:
     do {
         echo "Ingrese el numero de juego: ";
         $nj = trim(fgets(STDIN));
-        if ($nj >= 0 || $nj <= $cantJuegos){
+        if ($nj >= 1 || $nj <= $cantJuegos){
             echo "**********************\n";
             if ($totalJuegosCargados[$nj]["puntosCruz"] > $totalJuegosCargados[$nj]["puntosCirculo"]) {
                 echo "Juego TATETI" . $nj . "(ganó X) \n";
@@ -114,7 +114,7 @@ siguiente formato:
         }else{
             echo "ERROR! el numero de juego ingresado no existe! Por favor ingrese un numero de juego valido: ";
         }
-    } while (!($nj >= 0 || $nj <= $cantJuegos));
+    } while (!($nj >= 1 || $nj <= $cantJuegos));
     
 }
 
