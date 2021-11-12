@@ -127,6 +127,28 @@ function mostrarJuego ($totalJuegosCargados){
     echo "**********************\n";
 }
 
+/**
+ * Solicita el nombre de jugador y muestra en pantalla el primer juego ganado por ese jugador.
+ * @param array $colecJuegos
+ * 
+ */
+
+function primeraVictoria($colecJuegos){
+    $np = count($colecJuegos);
+    $i = 0;
+    echo "Ingrese el nombre del jugador: ";
+    $nombreJug = trim(fgets(STDIN));
+    while($i<$n && !(($nombreJug == $colecJuegos["jugadorCruz"] && $colecJuegos["puntosCruz"] > $colecJuegos["puntosCirculo"]) ||( $nombreJug = $colecJuegos["jugadorCirculo"] && $colecJuegos["puntosCruz"] < $colecJuegos["puntosCirculo"]))){
+        $i++;
+    }
+    if ($i<$n){
+        GlobalMostrarJuego($colecJuegos[$i]);
+    }else{
+        echo "El jugador " . $nombreJug . " no gano ningun juego. \n";
+    }
+
+
+}
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
