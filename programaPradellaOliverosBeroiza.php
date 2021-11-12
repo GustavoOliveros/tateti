@@ -134,6 +134,7 @@ function mostrarJuego ($totalJuegosCargados){
  */
 
 function primeraVictoria($colecJuegos){
+    // int $np $i string $nombreJug
     $np = count($colecJuegos);
     $i = 0;
     echo "Ingrese el nombre del jugador: ";
