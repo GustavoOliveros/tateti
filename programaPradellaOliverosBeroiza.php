@@ -138,7 +138,7 @@ function primeraVictoria($colecJuegos){
     $i = 0;
     echo "Ingrese el nombre del jugador: ";
     $nombreJug = trim(fgets(STDIN));
-    while($i<$n && !(($nombreJug == $colecJuegos["jugadorCruz"] && $colecJuegos["puntosCruz"] > $colecJuegos["puntosCirculo"]) ||( $nombreJug = $colecJuegos["jugadorCirculo"] && $colecJuegos["puntosCruz"] < $colecJuegos["puntosCirculo"]))){
+    while($i<$np && !(($nombreJug == $colecJuegos["jugadorCruz"] && $colecJuegos["puntosCruz"] > $colecJuegos["puntosCirculo"]) ||( $nombreJug = $colecJuegos["jugadorCirculo"] && $colecJuegos["puntosCruz"] < $colecJuegos["puntosCirculo"]))){
         $i++;
     }
     if ($i<$np){
