@@ -150,6 +150,42 @@ function primeraVictoria($colecJuegos){
 
 
 }
+
+/**
+  * Muestra el porcentaje de juegos ganados, en total y segun el simbolo elegido
+  *@param array $totalPartidas
+  */
+  function porcentajeGanados($totalPartidas){
+      // int $nPart $acumX $acumO $empates $i string $simbolo $
+    $nPart= count($totalPartidas);
+    $acumX = 0;
+    $acumO = 0;
+    $empates = 0;
+    for ($i = 0; $i<$nPart; $i++){
+        if ($totalPartidas["puntosCruz"] > $totalPartidas["puntosCirculo"]){
+            $acumX++;
+        }elseif ($totalPartidas["puntosCruz"] < $totalPartidas["puntosCirculo"]){
+            $acumO++;
+        }else {
+            $empates++;
+        }
+    }
+    do {
+      echo "Ingrese un simbolo para ver su porcentaje de victorias (X/O): ";
+      $simbolo = trim(fgets(STDIN));
+      if ($simbolo <> "X" || $simbolo <> "O"){
+          echo "ERROR! Ingrese un simbolo valido \n";
+
+      }
+    }while ($simbolo <> "X" || $simbolo <> "O");
+    
+    echo "En total se jugaron " . $nPart . " juegos de tateti, de los cuales " . $empates . " son empates y " . $acumO + $acumX . " son victorias. \n";
+    if ($simbolo == "X"){
+        echo " X ganó el " . (($acumX / $nPart)*100) . "% de los juegos ganados. \n";
+    } else{
+      echo " O ganó el " . (($acumO / $nPart)*100) . "% de los juegos ganados. \n";
+    }
+}
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
