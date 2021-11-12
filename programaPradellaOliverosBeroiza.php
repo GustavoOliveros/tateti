@@ -141,8 +141,8 @@ function primeraVictoria($colecJuegos){
     while($i<$n && !(($nombreJug == $colecJuegos["jugadorCruz"] && $colecJuegos["puntosCruz"] > $colecJuegos["puntosCirculo"]) ||( $nombreJug = $colecJuegos["jugadorCirculo"] && $colecJuegos["puntosCruz"] < $colecJuegos["puntosCirculo"]))){
         $i++;
     }
-    if ($i<$n){
-        GlobalMostrarJuego($colecJuegos[$i]);
+    if ($i<$np){
+        mostrarJuego($colecJuegos[$i]);
     }else{
         echo "El jugador " . $nombreJug . " no gano ningun juego. \n";
     }
