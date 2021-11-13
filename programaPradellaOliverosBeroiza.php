@@ -185,7 +185,50 @@ function primeraVictoria($colecJuegos){
     } else{
       echo " O ganó el " . (($acumO / $nPart)*100) . "% de los juegos ganados. \n";
     }
+
 }
+/**
+ * Muestra resumen del jugador. (opcion 5)
+ * @param $coleccionDeJuegos
+ */
+function resumenJugador($coleccionDeJuegos){
+    //string $nombreJugador , $resumen
+    $numDeJuegos = count($coleccionDeJuegos);
+    $gano = 0;
+    $perdio = 0;
+    $empato = 0;
+    $puntosAcum = 0;
+    $resumen = [];
+    echo"Ingrese el nombre del jugador: ";
+    $nombreJugador = trim(fgets(STDIN));
+    $resumen ["nombre"] = $nombreJugador;
+    for($i=0; $i<$numDeJuegos; $i++){
+        if($coleccionDeJuegos[$i]["puntosCruz"] > $coleccionDeJuegos[$i]["puntosCirculo"]){
+            $gano = $gano  + 1;
+            $puntosAcum = $puntosAcum + $coleccionDeJuegos[$i]["puntosCruz"];
+        }elseif($coleccionDeJuegos[$i]["puntosCruz"] < $coleccionDeJuegos[$i]["puntosCirculo"]){
+             $perdio = $perdio+1;
+        }else{
+            $empato = $empato +1;
+            $puntosAcum = $puntosAcum + 1;
+        }
+    }
+    $resumen ["juegosGanados"] = $gano;
+    $resumen ["juegosPerdidos"] = $perdio;
+    $resumen ["juegosEmpatados"] = $empato;
+    $resumen ["puntosAcumulados"] = $puntosAcum;
+    
+    echo"**********************";
+    echo"Jugador: ".$resumen["nombre"]."\n";
+    echo"Ganó: ".$resumen["juegosGanados"]." juegos\n";
+    echo"Perdió: ".$resumen["juegosPerdidos"]." juegos\n";
+    echo"Empató: ".$resumen["juegosEmpatados"]." juegos\n";
+    echo"Total de puntos acumulados: ".$resumen["puntosAcumulados"]." puntos\n";
+    echo"**********************\n";
+
+}
+
+
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
 /**************************************/
@@ -200,6 +243,7 @@ function primeraVictoria($colecJuegos){
 
 // Precargamos 10 juegos
 $coleccionDeJuegos = cargarJuegos();
+$resumen = resumenJugador($coleccionDeJuegos);
 
 // Mostramos menu
 $opcionDeMenu = seleccionarOpcion();
