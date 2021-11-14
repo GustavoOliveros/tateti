@@ -203,12 +203,12 @@ function resumenJugador($coleccionDeJuegos){
     $nombreJugador = trim(fgets(STDIN));
     $resumen ["nombre"] = $nombreJugador;
     for($i=0; $i<$numDeJuegos; $i++){
-        if($coleccionDeJuegos[$i]["puntosCruz"] > $coleccionDeJuegos[$i]["puntosCirculo"]){
+        if($nombreJugador == $coleccionDeJuegos["jugadorCruz"] && $coleccionDeJuegos["puntosCruz"] > $coleccionDeJuegos["puntosCirculo"] || $nombreJugador == $coleccionDeJuegos["jugadorCirculo"] && $coleccionDeJuegos["puntosCruz"] < $coleccionDeJuegos["puntosCirculo"]){
             $gano = $gano  + 1;
             $puntosAcum = $puntosAcum + $coleccionDeJuegos[$i]["puntosCruz"];
-        }elseif($coleccionDeJuegos[$i]["puntosCruz"] < $coleccionDeJuegos[$i]["puntosCirculo"]){
+        }elseif($nombreJugador == $coleccionDeJuegos["jugadorCruz"] && $coleccionDeJuegos["puntosCruz"] < $coleccionDeJuegos["puntosCirculo"] || $nombreJugador == $coleccionDeJuegos["jugadorCirculo"] && $coleccionDeJuegos["puntosCruz"] > $coleccionDeJuegos["puntosCirculo"] ){
              $perdio = $perdio+1;
-        }else{
+        }elseif (($nombreJugador == $coleccionDeJuegos["jugadorCruz"] || $nombreJugador == $coleccionDeJuegos["jugadorCirculo"]) && ( $coleccionDeJuegos["puntosCruz"] == $coleccionDeJuegos["puntosCirculo"])){
             $empato = $empato +1;
             $puntosAcum = $puntosAcum + 1;
         }
