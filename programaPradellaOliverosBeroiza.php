@@ -189,27 +189,26 @@ function primeraVictoria($colecJuegos){
 }
 /**
  * Muestra resumen del jugador. (opcion 5)
- * @param $coleccionDeJuegos
+ * @param array $coleccionDeJuegos
+ * @param string $nombre
  */
-function resumenJugador($coleccionDeJuegos){
-    //string $nombreJugador , $resumen
+function resumenJugador($coleccionDeJuegos, $nombreJugador){
+    //INTEGER $gano, $perdio, $empato, $puntosAcum, STRING $nombreJugador, ARRAY $resumen
     $numDeJuegos = count($coleccionDeJuegos);
     $gano = 0;
     $perdio = 0;
     $empato = 0;
     $puntosAcum = 0;
-    $resumen = [];
-    echo"Ingrese el nombre del jugador: ";
-    $nombreJugador = trim(fgets(STDIN));
-    $resumen ["nombre"] = $nombreJugador;
-    for($i=0; $i<$numDeJuegos; $i++){
-        if($nombreJugador == $coleccionDeJuegos["jugadorCruz"] && $coleccionDeJuegos["puntosCruz"] > $coleccionDeJuegos["puntosCirculo"] || $nombreJugador == $coleccionDeJuegos["jugadorCirculo"] && $coleccionDeJuegos["puntosCruz"] < $coleccionDeJuegos["puntosCirculo"]){
-            $gano = $gano  + 1;
+    $resumen["nombre"] = $nombreJugador; //preguntar si el ingreso del nombre es por el modulo o por programa principal
+
+    for($i=0; $i < $numDeJuegos; $i++){
+        if($nombreJugador == $coleccionDeJuegos[$i]["jugadorCruz"] && $coleccionDeJuegos[$i]["puntosCruz"] > $coleccionDeJuegos[$i]["puntosCirculo"] || $nombreJugador == $coleccionDeJuegos[$i]["jugadorCirculo"] && $coleccionDeJuegos[$i]["puntosCruz"] < $coleccionDeJuegos[$i]["puntosCirculo"]){
+            $gano = $gano + 1;
             $puntosAcum = $puntosAcum + $coleccionDeJuegos[$i]["puntosCruz"];
-        }elseif($nombreJugador == $coleccionDeJuegos["jugadorCruz"] && $coleccionDeJuegos["puntosCruz"] < $coleccionDeJuegos["puntosCirculo"] || $nombreJugador == $coleccionDeJuegos["jugadorCirculo"] && $coleccionDeJuegos["puntosCruz"] > $coleccionDeJuegos["puntosCirculo"] ){
-             $perdio = $perdio+1;
-        }elseif (($nombreJugador == $coleccionDeJuegos["jugadorCruz"] || $nombreJugador == $coleccionDeJuegos["jugadorCirculo"]) && ( $coleccionDeJuegos["puntosCruz"] == $coleccionDeJuegos["puntosCirculo"])){
-            $empato = $empato +1;
+        }elseif($nombreJugador == $coleccionDeJuegos[$i]["jugadorCruz"] && $coleccionDeJuegos[$i]["puntosCruz"] < $coleccionDeJuegos[$i]["puntosCirculo"] || $nombreJugador == $coleccionDeJuegos[$i]["jugadorCirculo"] && $coleccionDeJuegos[$i]["puntosCruz"] > $coleccionDeJuegos[$i]["puntosCirculo"] ){
+             $perdio = $perdio + 1;
+        }elseif (($nombreJugador == $coleccionDeJuegos[$i]["jugadorCruz"] || $nombreJugador == $coleccionDeJuegos[$i]["jugadorCirculo"]) && ( $coleccionDeJuegos[$i]["puntosCruz"] == $coleccionDeJuegos[$i]["puntosCirculo"])){
+            $empato = $empato + 1;
             $puntosAcum = $puntosAcum + 1;
         }
     }
@@ -218,14 +217,13 @@ function resumenJugador($coleccionDeJuegos){
     $resumen ["juegosEmpatados"] = $empato;
     $resumen ["puntosAcumulados"] = $puntosAcum;
     
-    echo"**********************";
+    echo"**********************\n";
     echo"Jugador: ".$resumen["nombre"]."\n";
     echo"Ganó: ".$resumen["juegosGanados"]." juegos\n";
     echo"Perdió: ".$resumen["juegosPerdidos"]." juegos\n";
     echo"Empató: ".$resumen["juegosEmpatados"]." juegos\n";
     echo"Total de puntos acumulados: ".$resumen["puntosAcumulados"]." puntos\n";
     echo"**********************\n";
-
 }
 
 
@@ -243,7 +241,7 @@ function resumenJugador($coleccionDeJuegos){
 
 // Precargamos 10 juegos
 $coleccionDeJuegos = cargarJuegos();
-$resumen = resumenJugador($coleccionDeJuegos);
+$resumen = resumenJugador($coleccionDeJuegos, "PEPE");
 
 // Mostramos menu
 $opcionDeMenu = seleccionarOpcion();
