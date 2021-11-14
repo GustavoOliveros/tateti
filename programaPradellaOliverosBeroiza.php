@@ -226,6 +226,27 @@ function resumenJugador($coleccionDeJuegos, $nombreJugador){
     echo"**********************\n";
 }
 
+/**
+ * Funcion que le pide que se ingrese un simbolo X o O
+ * @return string
+ */
+function elegirSimbolo(){
+    //string $simbolo, boolean $valorSimbolo;
+    $valorSimbolo = false;
+     do{  
+        echo"Ingrese un simbolo 'X' o 'O': ";
+        $simbolo = strtoupper(trim(fgets(STDIN)));
+        if($simbolo  == "X" || $simbolo == "O"){
+            $valorSimbolo = true;
+        }else{
+            echo"Simbolo invalido, :";
+        }
+    }while ($valorSimbolo == false);
+    
+    return $simbolo;   
+}
+
+
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -251,6 +272,13 @@ $opcionDeMenu = seleccionarOpcion();
 $juego = jugar();
 $coleccionDeJuegos = agregarJuegos($coleccionDeJuegos, $juego);
 mostrarJuego($coleccionDeJuegos);
+
+//Funcion de menu resumen (opcion 5)
+$resumen = resumenJugador($coleccionDeJuegos);
+
+//Funcion que ingresa X o O y lo devuelve
+$simbolo = elegirSimbolo();
+
 // print_r($coleccionDeJuegos);
 // --
 
