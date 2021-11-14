@@ -239,7 +239,7 @@ function elegirSimbolo(){
         if($simbolo  == "X" || $simbolo == "O"){
             $valorSimbolo = true;
         }else{
-            echo"Simbolo invalido, :";
+            echo"Simbolo invalido\n";
         }
     }while ($valorSimbolo == false);
     
@@ -261,6 +261,7 @@ function elegirSimbolo(){
 //Proceso:
 
 // Precargamos 10 juegos
+$simboloElegido = elegirSimbolo();
 $coleccionDeJuegos = cargarJuegos();
 $resumen = resumenJugador($coleccionDeJuegos, "PEPE");
 
