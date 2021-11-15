@@ -19,7 +19,7 @@ include_once("tateti.php");
 /**************************************/
 
 /**
- * Crea e inicializa una colección de 10 juegos
+ * 1) Crea e inicializa una colección de 10 juegos
  * @return array arreglo indexado de arreglos asociativos
  */
 function cargarJuegos(){
@@ -41,26 +41,7 @@ function cargarJuegos(){
 }
 
 /**
- * Agrega el arreglo resultante de una partida al arreglo que almacena todos los juegos
- * @param array $juegosJugados
- * @param array $juegoNuevo
- * @return array arreglo indexado de arreglos asociativos
- */
-function agregarJuegos($juegosJugados, $juegoNuevo){
-    // int $cantJuegosJugados, array $coleccionNueva
-
-    // Se obtiene la cantidad de elementos mediante la función count
-    $cantJuegosJugados = count($juegosJugados);
-
-    // Se agrega el juego nuevo en la posición siguiente a la última (obtenida por la función count)
-    $coleccionNueva = $juegosJugados;
-    $coleccionNueva[$cantJuegosJugados] = $juegoNuevo;
-
-    return $coleccionNueva;
-}
-
-/**
- * Solicita al usuario un número de opcion de menu
+ * 2) Solicita al usuario un número de opcion de menu
  * @return int 
  */
 function seleccionarOpcion()
@@ -88,13 +69,10 @@ function seleccionarOpcion()
     return $opcion;
 }
 
-
-/*  con el
-siguiente formato:
- */
+// 3) La función solicitarNumeroEntre ya se encuentra en tateti.php
 
 /**
- * Mostrar un Juego: Se le solicita al usuario un número de juego y se muestra el resultado en pantalla
+ * 4) Mostrar un Juego: Se le solicita al usuario un número de juego y se muestra el resultado en pantalla
  * @param array $totalJuegosCargados
  */
 function mostrarJuego ($totalJuegosCargados){
@@ -128,29 +106,63 @@ function mostrarJuego ($totalJuegosCargados){
 }
 
 /**
- * Solicita el nombre de jugador y muestra en pantalla el primer juego ganado por ese jugador.
- * @param array $colecJuegos
- * 
+ * 5) Agrega el arreglo resultante de una partida al arreglo que almacena todos los juegos
+ * @param array $juegosJugados
+ * @param array $juegoNuevo
+ * @return array arreglo indexado de arreglos asociativos
  */
+function agregarJuegos($juegosJugados, $juegoNuevo){
+    // int $cantJuegosJugados, array $coleccionNueva
 
-function primeraVictoria($colecJuegos){
-    // int $np $i string $nombreJug
-    $np = count($colecJuegos);
-    $i = 0;
-    echo "Ingrese el nombre del jugador: ";
-    $nombreJug = trim(fgets(STDIN));
-    while($i<$np && !(($nombreJug == $colecJuegos["jugadorCruz"] && $colecJuegos["puntosCruz"] > $colecJuegos["puntosCirculo"]) ||( $nombreJug = $colecJuegos["jugadorCirculo"] && $colecJuegos["puntosCruz"] < $colecJuegos["puntosCirculo"]))){
-        $i++;
-    }
-    if ($i<$np){
-        mostrarJuego($colecJuegos[$i]);
-    }else{
-        echo "El jugador " . $nombreJug . " no gano ningun juego. \n";
-    }
+    // Se obtiene la cantidad de elementos mediante la función count
+    $cantJuegosJugados = count($juegosJugados);
 
+    // Se agrega el juego nuevo en la posición siguiente a la última (obtenida por la función count)
+    $coleccionNueva = $juegosJugados;
+    $coleccionNueva[$cantJuegosJugados] = $juegoNuevo;
 
+    return $coleccionNueva;
 }
 
+/**
+ * 6) Retorna el índice del primer juego ganado del jugador ingresado
+ * @param array $colecJuegos
+ * @param string $nombreJug
+ * @return int retorna -1 si el jugador no ganó nada
+ */
+function primeraVictoria($colecJuegos, $nombreJug){
+    // int $cont, $indice, $numPartidas, boolean $bandera
+
+    $numPartidas = count($colecJuegos);
+    $cont = 0;
+    $bandera = true;
+
+    while($bandera == true){
+        if(($nombreJug == $colecJuegos[$cont]["jugadorCruz"])){ //Verifica el nombre del jug Cruz
+            if($colecJuegos[$cont]["puntosCruz"] > $colecJuegos[$cont]["puntosCirculo"]){ //Si ganó, la bandera cambio a falso y se termina la repetitiva 
+                $bandera = false;   
+            }
+        } elseif($nombreJug == $colecJuegos[$cont]["jugadorCirculo"]){ //Verifica el nombre del jug Circulo
+            if($colecJuegos[$cont]["puntosCirculo"] > $colecJuegos[$cont]["puntosCruz"]){ //Si ganó, la bandera cambio a falso y se termina la repetitiva 
+                $bandera = false;
+            }
+        }
+        $cont++;
+        if($cont == $numPartidas){ //Previene repetitiva infinita cuando el jug no ganó ninguna partida
+            $bandera = false;
+        }
+    }
+
+    if($cont == $numPartidas){ //Si hizo aunque sea un ciclo, le asigna cont a indice sino le asigna -1
+        $indice = -1;
+    } else{
+        $indice = $cont - 1;
+    }
+
+    return $indice;
+}
+
+/* Se tendría que implementar las funciones 8, 9 y 10 en PorcentajeGanados o sacarlo y hacer dicho calculo en el programa principal */
 /**
   * Muestra el porcentaje de juegos ganados, en total y segun el simbolo elegido
   *@param array $totalPartidas
@@ -187,8 +199,9 @@ function primeraVictoria($colecJuegos){
     }
 
 }
+
 /**
- * Muestra resumen del jugador. (opcion 5)
+ * 7) Muestra resumen del jugador. (opcion 5)
  * @param array $coleccionDeJuegos
  * @param string $nombre
  */
@@ -227,7 +240,7 @@ function resumenJugador($coleccionDeJuegos, $nombreJugador){
 }
 
 /**
- * Funcion que le pide que se ingrese un simbolo X o O
+ * 8) Funcion que le pide que se ingrese un simbolo X o O
  * @return string
  */
 function elegirSimbolo(){
@@ -246,6 +259,37 @@ function elegirSimbolo(){
     return $simbolo;   
 }
 
+/* FALTA 9 */
+/* Implementar una función sin parámetros formales que solicite al usuario un símbolo X o O, y retorne el
+símbolo elegido. La función debe validar el datos ingresado por el usuario (Utilice funciones predefinidas
+de string). */
+
+/**
+ * 10) Retorna la cantidad de victoria del símbolo de entrada
+ * @param array $coleccionJuegosJugados
+ * @param string $simboloAVerificar (X/O)
+ */
+function victoriasPorSimbolo($coleccionJuegosJugados, $simboloAVerificar){
+    // int $numJuegos, $juegosGanados
+    $numJuegos = count($coleccionJuegosJugados);
+
+    $juegosGanados = 0;
+
+    if($simboloAVerificar == "X"){
+        for($i = 0; $i < $numJuegos; $i++){
+           if($coleccionJuegosJugados[$i]["puntosCruz"] > $coleccionJuegosJugados[$i]["puntosCirculo"]){
+              $juegosGanados = $juegosGanados + 1;
+           }
+        }
+    } else{
+        for($i = 0; $i < $numJuegos; $i++){
+            if($coleccionJuegosJugados[$i]["puntosCirculo"] > $coleccionJuegosJugados[$i]["puntosCruz"]){
+                $juegosGanados = $juegosGanados + 1;
+            }
+        }
+    }
+    return $juegosGanados;
+}
 
 
 /**************************************/
@@ -261,9 +305,27 @@ function elegirSimbolo(){
 //Proceso:
 
 // Precargamos 10 juegos
-$simboloElegido = elegirSimbolo();
 $coleccionDeJuegos = cargarJuegos();
-$resumen = resumenJugador($coleccionDeJuegos, "PEPE");
+
+/* Instrucciones para probar modulos. Se puede reutilizar para el programa principal
+6)
+echo "Ingrese el nombre que desea buscar su primera victoria: \n";
+$nom = strtoupper(trim(fgets(STDIN)));
+
+$primVictoria = primeraVictoria($coleccionDeJuegos, $nom);
+
+if($primVictoria > -1){
+    echo "La primera victoria de " . $nom . " fue en la partida #" . $primVictoria;
+} else{
+    echo $nom . " no ganó ninguna partida.";
+}
+
+10)
+echo "***** Partidas ganadas *****\n";
+$simboloElegido = elegirSimbolo();
+$partGanadas = victoriasPorSimbolo($coleccionDeJuegos, $simboloElegido);
+echo $simboloElegido . " ganó " . $partGanadas . "\n";
+$resumen = resumenJugador($coleccionDeJuegos, "PEPE"); */
 
 // Mostramos menu
 $opcionDeMenu = seleccionarOpcion();
@@ -275,7 +337,9 @@ $coleccionDeJuegos = agregarJuegos($coleccionDeJuegos, $juego);
 mostrarJuego($coleccionDeJuegos);
 
 //Funcion de menu resumen (opcion 5)
-$resumen = resumenJugador($coleccionDeJuegos);
+echo "Ingrese el nombre del jugador al que desea obtener su resumen: \n";
+$resumNom = trim(fgets(STDIN));
+$resumen = resumenJugador($coleccionDeJuegos, $resumNom);
 
 //Funcion que ingresa X o O y lo devuelve
 $simbolo = elegirSimbolo();
