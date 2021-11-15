@@ -270,9 +270,23 @@ function elegirSimbolo(){
     return $simbolo;   
 }
 
-/* FALTA 9 */
-/* Implementar una función que dada una colección de juegos retorne la cantidad de juegos ganados (sin
-importar si es X o O, es decir, algun jugador debe haber ganado, no debe haber empate.) */
+
+/**
+  * 9) Funcion que dada una colección de juegos retorna la cantidad de juegos ganados (sin empates)
+  *@param array $totalJue
+  *@param return int
+  */
+  function totalGanadas($totalJue){
+    // int $acumG $nJueg $i
+  $nJueg= count($totalJue);
+  $acumG = 0;
+  
+  for ($i = 0; $i<$nJueg; $i++){
+      if (($totalJue["puntosCruz"] > $totalJue["puntosCirculo"]) || ($totalJue["puntosCruz"] < $totalJue["puntosCirculo"]) ) {
+          $acumG++;
+      }
+      return $acumG;
+  }
 
 /**
  * 10) Retorna la cantidad de victoria del símbolo de entrada
