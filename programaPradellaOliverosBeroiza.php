@@ -138,24 +138,34 @@ function primeraVictoria($colecJuegos, $nombreJug){
     $bandera = true;
 
     while($bandera == true){
-        if(($nombreJug == $colecJuegos[$cont]["jugadorCruz"])){ //Verifica el nombre del jug Cruz
-            if($colecJuegos[$cont]["puntosCruz"] > $colecJuegos[$cont]["puntosCirculo"]){ //Si ganó, la bandera cambio a falso y se termina la repetitiva 
+        // Determino si la persona es el jugador Cruz
+        if(($nombreJug == $colecJuegos[$cont]["jugadorCruz"])){
+            // Si es así, determino si ganó
+            if($colecJuegos[$cont]["puntosCruz"] > $colecJuegos[$cont]["puntosCirculo"]){
+                // Si ganó, asigno false a la bandera para terminar la repetitiva
                 $bandera = false;   
             }
-        } elseif($nombreJug == $colecJuegos[$cont]["jugadorCirculo"]){ //Verifica el nombre del jug Circulo
-            if($colecJuegos[$cont]["puntosCirculo"] > $colecJuegos[$cont]["puntosCruz"]){ //Si ganó, la bandera cambio a falso y se termina la repetitiva 
+        // Como no es Cruz, determino si la persona es el jugador Circulo
+        } elseif($nombreJug == $colecJuegos[$cont]["jugadorCirculo"]){
+            // Si es así, determino si ganó.
+            if($colecJuegos[$cont]["puntosCirculo"] > $colecJuegos[$cont]["puntosCruz"]){
+                // Si ganó, asigno false a la bandera para terminar la repetitiva
                 $bandera = false;
             }
         }
         $cont++;
-        if($cont == $numPartidas){ //Previene repetitiva infinita cuando el jug no ganó ninguna partida
+        
+        // Si ya revisó todas las partidas y no ganó ninguna, asigno false para prevenir repetitiva infinita
+        if($cont == $numPartidas){
             $bandera = false;
         }
     }
 
-    if($cont == $numPartidas){ //Si hizo aunque sea un ciclo, le asigna cont a indice sino le asigna -1
+    // Asigna -1 si no hubo victorias. Caso contrario, le asigna el indice que sería el contador
+    if($cont == $numPartidas){
         $indice = -1;
     } else{
+        // Ya que el primer indice es el 0, se tiene que restar 1
         $indice = $cont - 1;
     }
 
