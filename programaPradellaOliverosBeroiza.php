@@ -260,9 +260,8 @@ function elegirSimbolo(){
 }
 
 /* FALTA 9 */
-/* Implementar una función sin parámetros formales que solicite al usuario un símbolo X o O, y retorne el
-símbolo elegido. La función debe validar el datos ingresado por el usuario (Utilice funciones predefinidas
-de string). */
+/* Implementar una función que dada una colección de juegos retorne la cantidad de juegos ganados (sin
+importar si es X o O, es decir, algun jugador debe haber ganado, no debe haber empate.) */
 
 /**
  * 10) Retorna la cantidad de victoria del símbolo de entrada
