@@ -192,6 +192,7 @@ function primeraVictoria($colecJuegos, $nombreJug){
             $empates++;
         }
     }
+   
     do {
       echo "Ingrese un simbolo para ver su porcentaje de victorias (X/O): ";
       $simbolo = trim(fgets(STDIN));
@@ -346,7 +347,7 @@ $coleccionDeJuegos = agregarJuegos($coleccionDeJuegos, $juego);
 mostrarJuego($coleccionDeJuegos);
 
 //Funcion de menu resumen (opcion 5)
-echo "Ingrese el nombre del jugador al que desea obtener su resumen: \n";
+echo "Ingrese el nombre del jugador de quien desea obtener el resumen: \n";
 $resumNom = trim(fgets(STDIN));
 $resumen = resumenJugador($coleccionDeJuegos, $resumNom);
 
