@@ -277,6 +277,19 @@ function victoriasPorSimbolo($coleccionJuegosJugados, $simboloAVerificar){
     return $juegosGanados;
 }
 
+/**
+ * 11) Retorna los nombres de los jugadores O
+ * @param array $colecJuegos
+ * @return integer
+ */
+function jugadoresO($colecJuegos){
+    //string $jugadorO int $numJugadoresO, $i
+    $numJugadoresO = count($colecJuegos);
+    for($i = 0; $i <= $numJugadoresO; $i++){
+        $jugadorO = $colecJuegos[$i]["jugadorCirculo"];
+        echo $jugadorO. "\n";
+    }
+}
 
 /**************************************/
 /*********** PROGRAMA PRINCIPAL *******/
@@ -329,6 +342,9 @@ $resumen = resumenJugador($coleccionDeJuegos, $resumNom);
 
 //Funcion que ingresa X o O y lo devuelve
 $simbolo = elegirSimbolo();
+
+//Funcion que retona los jugadores que eligieron O
+$jugadoresConSimboloO = jugadoresO($coleccionDeJuegos);
 
 // print_r($coleccionDeJuegos);
 // --
