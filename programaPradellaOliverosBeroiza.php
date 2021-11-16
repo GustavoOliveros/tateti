@@ -172,45 +172,6 @@ function primeraVictoria($colecJuegos, $nombreJug){
     return $indice;
 }
 
-/* Se tendría que implementar las funciones 8, 9 y 10 en PorcentajeGanados o sacarlo y hacer dicho calculo en el programa principal */
-/**
-  * Muestra el porcentaje de juegos ganados, en total y segun el simbolo elegido
-  *@param array $totalPartidas
-  */
-  function porcentajeGanados($totalPartidas){
-      // int $nPart $acumX $acumO $empates $i string $simbolo $
-    $nPart= count($totalPartidas);
-    $acumX = 0;
-    $acumO = 0;
-    $empates = 0;
-    for ($i = 0; $i<$nPart; $i++){
-        if ($totalPartidas["puntosCruz"] > $totalPartidas["puntosCirculo"]){
-            $acumX++;
-        }elseif ($totalPartidas["puntosCruz"] < $totalPartidas["puntosCirculo"]){
-            $acumO++;
-        }else {
-            $empates++;
-        }
-    }
-   
-    do {
-      echo "Ingrese un simbolo para ver su porcentaje de victorias (X/O): ";
-      $simbolo = trim(fgets(STDIN));
-      if ($simbolo <> "X" || $simbolo <> "O"){
-          echo "ERROR! Ingrese un simbolo valido \n";
-
-      }
-    }while ($simbolo <> "X" || $simbolo <> "O");
-    
-    echo "En total se jugaron " . $nPart . " juegos de tateti, de los cuales " . $empates . " son empates y " . $acumO + $acumX . " son victorias. \n";
-    if ($simbolo == "X"){
-        echo " X ganó el " . (($acumX / $nPart)*100) . "% de los juegos ganados. \n";
-    } else{
-      echo " O ganó el " . (($acumO / $nPart)*100) . "% de los juegos ganados. \n";
-    }
-
-}
-
 /**
  * 7) Muestra resumen del jugador. (opcion 5)
  * @param array $coleccionDeJuegos
@@ -273,8 +234,8 @@ function elegirSimbolo(){
 
 /**
   * 9) Funcion que dada una colección de juegos retorna la cantidad de juegos ganados (sin empates)
-  *@param array $totalJue
-  *@param return int
+  * @param array $totalJue
+  * @return integer
   */
   function totalGanadas($totalJue){
     // int $acumG $nJueg $i
@@ -292,6 +253,7 @@ function elegirSimbolo(){
  * 10) Retorna la cantidad de victoria del símbolo de entrada
  * @param array $coleccionJuegosJugados
  * @param string $simboloAVerificar (X/O)
+ * @return integer
  */
 function victoriasPorSimbolo($coleccionJuegosJugados, $simboloAVerificar){
     // int $numJuegos, $juegosGanados
