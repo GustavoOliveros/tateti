@@ -287,7 +287,7 @@ function elegirSimbolo(){
       }
       return $acumG;
   }
-
+}
 /**
  * 10) Retorna la cantidad de victoria del símbolo de entrada
  * @param array $coleccionJuegosJugados
