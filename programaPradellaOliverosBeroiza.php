@@ -57,6 +57,7 @@ function seleccionarOpcion(){
         7) Salir
         *********************\n";
     echo ">>>>>>> Seleccione una opcion de menu: ";
+    // Usamos la función solicitarNumeroEntre de tateti.php, la cual se encarga de que la entrada sea válida
     $opcion = solicitarNumeroEntre(1, 7);
 
     return $opcion;
