@@ -44,28 +44,21 @@ function cargarJuegos(){
  * 2) Solicita al usuario un número de opcion de menu
  * @return int 
  */
-function seleccionarOpcion()
-{
-    //int $opcion boolean $condicion
-    $condicion = false;
+function seleccionarOpcion(){
+    //int $opcion
         echo "
+        *****************
         1) Jugar al tateti		
         2) Mostrar un juego		
         3) Mostrar el primer juego ganador		
         4) Mostrar porcentaje de Juegos ganados		
         5) Mostrar resumen de Jugador		
         6) Mostrar listado de juegos Ordenado por jugador O		
-        7) salir \n";	
-    do{
-        echo"Seleccione una opcion de menu: \n";
-        $opcion = trim(fgets(STDIN));
-        if($opcion > 0 && $opcion <= 7){
-            $condicion = true;
-        }else{
-            echo "Opcion invalida\n";
-        }
-        
-    } while($condicion == false);
+        7) Salir
+        *********************\n";
+    echo ">>>>>>> Seleccione una opcion de menu: ";
+    $opcion = solicitarNumeroEntre(1, 7);
+
     return $opcion;
 }
 
