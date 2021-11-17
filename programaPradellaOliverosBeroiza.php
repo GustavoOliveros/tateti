@@ -278,17 +278,32 @@ function victoriasPorSimbolo($coleccionJuegosJugados, $simboloAVerificar){
 }
 
 /**
- * 11) Retorna los nombres de los jugadores O
- * @param array $colecJuegos
- * @return integer
+ * 11) Función de comparación para ordenar jugadorCirculo alfabéticamente
+ * @param string $valorA
+ * @param string $valorB
+ * @return int 1 si es mayor, 0 si es igual, -1 si es menor
  */
-function jugadoresO($colecJuegos){
-    //string $jugadorO int $numJugadoresO, $i
-    $numJugadoresO = count($colecJuegos);
-    for($i = 0; $i <= $numJugadoresO; $i++){
-        $jugadorO = $colecJuegos[$i]["jugadorCirculo"];
-        echo $jugadorO. "\n";
-    }
+function esMayorO($valorA, $valorB){
+    // int $resultado
+
+    // Usamos la función strcasecmp, que compara dos string y retorna 1 si es mayor, 0 si es igual, -1 si es menor
+    $resultado = strcasecmp($valorA["jugadorCirculo"], $valorB["jugadorCirculo"]);
+    
+    return $resultado;
+}
+
+/**
+ * 11) Ordena las colección en base a los nombres de los jugadores O (alfabéticamente)
+ * @param array $colecJuegos
+ */
+function ordenarPorJugadoresO($juegosJugadosColeccion){
+    // array $colecJuegosOrdenadoPorO
+
+    // La función uasort permite ordenar el arreglo mediante una función de comparación definida por el programador (esMayorO). 
+    // Además, mantiene las asociaciones de índices.
+    uasort($juegosJugadosColeccion, "esMayorO");
+
+    return $juegosJugadosColeccion;
 }
 
 /**************************************/
@@ -305,6 +320,8 @@ function jugadoresO($colecJuegos){
 
 // Precargamos 10 juegos
 $coleccionDeJuegos = cargarJuegos();
+$coleccionDeJuegos = ordenarPorJugadoresO($coleccionDeJuegos);
+print_r($coleccionDeJuegos);
 
 /* Instrucciones para probar modulos. Se puede reutilizar para el programa principal
 6)
@@ -344,7 +361,7 @@ $resumen = resumenJugador($coleccionDeJuegos, $resumNom);
 $simbolo = elegirSimbolo();
 
 //Funcion que retona los jugadores que eligieron O
-$jugadoresConSimboloO = jugadoresO($coleccionDeJuegos);
+$jugadoresConSimboloO = ordenarPorJugadoresO($coleccionDeJuegos);
 
 // print_r($coleccionDeJuegos);
 // --
