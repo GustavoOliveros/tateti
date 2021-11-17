@@ -294,7 +294,7 @@ function ordenarPorJugadoresO($juegosJugadosColeccion){
     // array $colecJuegosOrdenadoPorO
 
     // La función uasort permite ordenar el arreglo mediante una función de comparación definida por el programador (esMayorO). 
-    // Además, mantiene las asociaciones de índices.
+    // Dicha función también mantiene las asociación de índices.
     uasort($juegosJugadosColeccion, "esMayorO");
 
     return $juegosJugadosColeccion;
