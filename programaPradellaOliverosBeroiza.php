@@ -150,7 +150,6 @@ function primeraVictoria($colecJuegos, $nombreJug){
     // Inicialización de variables
     $n = count($colecJuegos);
     $cont = 0;
-    $bandera = true;
 
     while($cont < $n && !esGanador($colecJuegos, $cont, $nombreJug)){
         $cont++;
@@ -205,7 +204,7 @@ function resumenJugador($colecJuegos, $nombreJugador){
 }
 
 /**
- * 8) Funcion que le pide que se ingrese un simbolo X o O
+ * 8) Funcion que pide y valida que se ingrese un simbolo X o O
  * @return string
  */
 function elegirSimbolo(){
@@ -226,21 +225,23 @@ function elegirSimbolo(){
 
 
 /**
-  * 9) Funcion que dada una colección de juegos retorna la cantidad de juegos ganados (sin empates)
-  * @param array $colecJuegos
-  * @return integer
-  */
-  function totalGanadas($colecJuegos){
+ * 9) Funcion que dada una colección de juegos retorna la cantidad de juegos ganados (sin empates)
+ * @param array $colecJuegos
+ * @return integer
+ */
+function totalGanadas($colecJuegos){
     // int $acumG $nJueg $i
-  $nJueg= count($colecJuegos);
-  $acumG = 0;
+    $nJueg= count($colecJuegos);
+    $acumG = 0;
   
-  for ($i = 0; $i<$nJueg; $i++){
-      if (($colecJuegos["puntosCruz"] > $colecJuegos["puntosCirculo"]) || ($colecJuegos["puntosCruz"] < $colecJuegos["puntosCirculo"]) ) {
-          $acumG++;
-      }
-      return $acumG;
-  }
+    for ($i = 0; $i<$nJueg; $i++){
+        if ($colecJuegos[$i]["puntosCruz"] > $colecJuegos[$i]["puntosCirculo"]){
+            $acumG++;
+        } elseif($colecJuegos[$i]["puntosCruz"] < $colecJuegos[$i]["puntosCirculo"]){
+            $acumG++;
+        }
+    }
+    return $acumG;
 }
 
 /**
@@ -309,9 +310,9 @@ function ordenarPorJugadoresO($colecJuegos){
 
 //Declaración de variables:
 /*
-INTEGER $opcion, $indiceMaximo, $numeroJuego, $indicePrimeraVictoria
-FLOAT 
-STRING $nombreJugador
+INTEGER $opcion, $indiceMaximo, $numeroJuego, $indicePrimeraVictoria, $vicTotales, $vicSimbolo
+FLOAT $porcVictorias
+STRING $nombreJugador, $simbolo
 ARRAY $coleccionDeJuegos, $juego
 */
 
@@ -363,7 +364,25 @@ do {
             break;
         case 4:
             // Mostrar porcentaje de Juegos ganados
+            // Obtención de datos
+            echo "\n******** Porcentaje de Juegos Ganados *******\n";
+            $simbolo = elegirSimbolo();
+            $vicTotales = totalGanadas($coleccionDeJuegos);
+            $vicSimbolo = victoriasPorSimbolo($coleccionDeJuegos, $simbolo);
 
+            // Calculo y alternativa para evitar división por 0
+            if($vicTotales > 0){
+                $porcVictorias = ($vicSimbolo / $vicTotales) * 100;
+            } else{
+                $porcVictorias = 0;
+            }
+
+            // Visualización en pantalla
+            echo "**********************\n";
+            // echo "Victorias totales: ". $vicTotales;
+            // echo "\nVictorias del símbolo ". $simbolo . ": ". $vicSimbolo;
+            echo "\nPorcentaje de victorias de ". $simbolo . ": " . $porcVictorias . "%";
+            echo "\n**********************\n";
             break;
         case 5:
             // Mostrar resumen de Jugador
