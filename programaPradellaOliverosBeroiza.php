@@ -386,7 +386,10 @@ do {
             break;
         case 5:
             // Mostrar resumen de Jugador
-
+            echo "\n******** Resumen de jugador *******\n";
+            echo "Ingrese el nombre del jugador: ";
+            $nombreJugador = strtoupper(trim(fgets(STDIN))); 
+            $resJugador = resumenJugador($coleccionDeJuegos, $nombreJugador);
             break;
         case 6:
             // Mostrar listado de juegos Ordenado por jugador O
