@@ -393,6 +393,9 @@ do {
             break;
         case 6:
             // Mostrar listado de juegos Ordenado por jugador O
+            $jugadoresConSimboloO = ordenarPorJugadoresO($coleccionDeJuegos);
+            print_r($coleccionDeJuegos);
+
 
             break;
     }
