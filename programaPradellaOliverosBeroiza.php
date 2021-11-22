@@ -181,7 +181,13 @@ function resumenJugador($colecJuegos, $nombreJugador){
     for($i=0; $i < $numDeJuegos; $i++){
         if($nombreJugador == $colecJuegos[$i]["jugadorCruz"] && $colecJuegos[$i]["puntosCruz"] > $colecJuegos[$i]["puntosCirculo"] || $nombreJugador == $colecJuegos[$i]["jugadorCirculo"] && $colecJuegos[$i]["puntosCruz"] < $colecJuegos[$i]["puntosCirculo"]){
             $gano = $gano + 1;
-            $puntosAcum = $puntosAcum + $colecJuegos[$i]["puntosCruz"] + $colecJuegos[$i]["puntosCirculo"];
+                //En este punto ya sabemos que gano, entonces para los condicionales siguientes solo vemos con que simbolo coincide. de ahi sumamos sus puntos.
+                if ($nombreJugador == $colecJuegos[$i]["jugadorCruz"]){
+                    $puntosAcum = $puntosAcum + $colecJuegos[$i]["puntosCruz"];
+                } elseif ($nombreJugador == $colecJuegos[$i]["jugadorCirculo"]){
+                    $puntosAcum = $puntosAcum + $colecJuegos[$i]["puntosCirculo"];
+                }
+           
         }elseif($nombreJugador == $colecJuegos[$i]["jugadorCruz"] && $colecJuegos[$i]["puntosCruz"] < $colecJuegos[$i]["puntosCirculo"] || $nombreJugador == $colecJuegos[$i]["jugadorCirculo"] && $colecJuegos[$i]["puntosCruz"] > $colecJuegos[$i]["puntosCirculo"] ){
              $perdio = $perdio + 1;
         }elseif (($nombreJugador == $colecJuegos[$i]["jugadorCruz"] || $nombreJugador == $colecJuegos[$i]["jugadorCirculo"]) && ( $colecJuegos[$i]["puntosCruz"] == $colecJuegos[$i]["puntosCirculo"])){
