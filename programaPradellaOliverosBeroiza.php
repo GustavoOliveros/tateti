@@ -26,7 +26,7 @@ function cargarJuegos(){
     // array $colecJuegos
 
     // 10 juegos generados para hacer la precarga
-    $colecJuegos[0] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "PEPE", "puntosCruz" => 3, "puntosCirculo" => 0];
+    $colecJuegos[0] = ["jugadorCruz" => "BAUTISTA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 3];
     $colecJuegos[1] = ["jugadorCruz" => "ENRIQUE", "jugadorCirculo" => "BAUTISTA", "puntosCruz" => 1, "puntosCirculo" => 1];
     $colecJuegos[2] = ["jugadorCruz" => "MARIA", "jugadorCirculo" => "PEPE", "puntosCruz" => 0, "puntosCirculo" => 5];
     $colecJuegos[3] = ["jugadorCruz" => "SOFIA", "jugadorCirculo" => "MARIA", "puntosCruz" => 1, "puntosCirculo" => 1];
@@ -381,7 +381,7 @@ do {
             echo "**********************\n";
             // echo "Victorias totales: ". $vicTotales;
             // echo "\nVictorias del símbolo ". $simbolo . ": ". $vicSimbolo;
-            echo "\nPorcentaje de victorias de ". $simbolo . ": " . $porcVictorias . "%";
+            echo "\nPorcentaje de victorias de ". $simbolo . ": " . round($porcVictorias, 2)  . "%";
             echo "\n**********************\n";
             break;
         case 5:
