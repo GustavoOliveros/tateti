@@ -301,7 +301,7 @@ function ordenarPorJugadoresO($colecJuegos){
     // Dicha función también mantiene las asociación de índices.
     uasort($colecJuegos, "esMayorO");
 
-    return $colecJuegos;
+    print_r($colecJuegos);
 }
 
 /**************************************/
@@ -343,10 +343,10 @@ do {
         case 2:
             // Mostrar un Juego
             echo "\n************  Mostrar un Juego  *************\n";
-            $indiceMaximo = count($coleccionDeJuegos) - 1;
+            $indiceMaximo = count($coleccionDeJuegos);
             echo "Ingrese el número del juego que desea ver: ";
             $numeroJuego = solicitarNumeroEntre(0, $indiceMaximo);
-            mostrarJuego($coleccionDeJuegos, $numeroJuego);
+            mostrarJuego($coleccionDeJuegos, ($numeroJuego - 1));
 
             break;
         case 3:
@@ -394,7 +394,7 @@ do {
         case 6:
             // Mostrar listado de juegos Ordenado por jugador O
             $jugadoresConSimboloO = ordenarPorJugadoresO($coleccionDeJuegos);
-            print_r($coleccionDeJuegos);
+            echo $jugadoresConSimboloO;
 
 
             break;
