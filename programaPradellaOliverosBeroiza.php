@@ -73,11 +73,11 @@ function seleccionarOpcion(){
 function mostrarJuego ($colecJuegos, $nj){
     echo "**********************\n";
     if ($colecJuegos[$nj]["puntosCruz"] > $colecJuegos[$nj]["puntosCirculo"]) {
-        echo "Juego TATETI: " . $nj . " (ganó X) \n";
+        echo "Juego TATETI: " . $nj + 1 . " (ganó X) \n";
     } elseif ($colecJuegos[$nj]["puntosCruz"] < $colecJuegos[$nj]["puntosCirculo"]) {
-        echo "Juego TATETI: " . $nj . " (ganó O) \n";
+        echo "Juego TATETI: " . $nj + 1 . " (ganó O) \n";
     } else {
-        echo "Juego TATETI: " . $nj . " (empate) \n";
+        echo "Juego TATETI: " . $nj + 1 . " (empate) \n";
     }
     echo "Jugador X: " . $colecJuegos[$nj]["jugadorCruz"] . " obtuvo " . $colecJuegos[$nj]["puntosCruz"] . " puntos. \n";
     
