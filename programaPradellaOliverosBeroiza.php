@@ -394,7 +394,7 @@ do {
         case 6:
             // Mostrar listado de juegos Ordenado por jugador O
             $jugadoresConSimboloO = ordenarPorJugadoresO($coleccionDeJuegos);
-            echo $jugadoresConSimboloO;
+            
 
 
             break;
