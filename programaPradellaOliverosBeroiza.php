@@ -184,15 +184,35 @@ function resumenJugador($colecJuegos, $nombreJugador){
     $resumen["nombre"] = $nombreJugador;
 
     // Hacemos recorrido exhaustivo del array para obtener todos los datos del jugador
-    for($i=0; $i < $numDeJuegos; $i++){
-        if($nombreJugador == $colecJuegos[$i]["jugadorCruz"] && $colecJuegos[$i]["puntosCruz"] > $colecJuegos[$i]["puntosCirculo"] || $nombreJugador == $colecJuegos[$i]["jugadorCirculo"] && $colecJuegos[$i]["puntosCruz"] < $colecJuegos[$i]["puntosCirculo"]){
-            $gano = $gano + 1;
-            $puntosAcum = $puntosAcum + $colecJuegos[$i]["puntosCruz"] + $colecJuegos[$i]["puntosCirculo"];
-        }elseif($nombreJugador == $colecJuegos[$i]["jugadorCruz"] && $colecJuegos[$i]["puntosCruz"] < $colecJuegos[$i]["puntosCirculo"] || $nombreJugador == $colecJuegos[$i]["jugadorCirculo"] && $colecJuegos[$i]["puntosCruz"] > $colecJuegos[$i]["puntosCirculo"] ){
-             $perdio = $perdio + 1;
-        }elseif (($nombreJugador == $colecJuegos[$i]["jugadorCruz"] || $nombreJugador == $colecJuegos[$i]["jugadorCirculo"]) && ( $colecJuegos[$i]["puntosCruz"] == $colecJuegos[$i]["puntosCirculo"])){
-            $empato = $empato + 1;
-            $puntosAcum = $puntosAcum + 1;
+    for($i = 0; $i < $numDeJuegos; $i++){
+        // Revisa si el jugador es el jugador cruz
+        if($nombreJugador == $colecJuegos[$i]["jugadorCruz"]){
+            // Si es, determina si ganó
+            if($colecJuegos[$i]["puntosCruz"] > $colecJuegos[$i]["puntosCirculo"]){
+                $gano = $gano + 1;
+                $puntosAcum = $puntosAcum + $colecJuegos[$i]["puntosCruz"];
+            // Si no ganó, determina si empató
+            } elseif($colecJuegos[$i]["puntosCruz"] == $colecJuegos[$i]["puntosCirculo"]){
+                $empato = $empato + 1;
+                $puntosAcum = $puntosAcum + $colecJuegos[$i]["puntosCruz"]; 
+            // Si no ganó ni empató, perdió.
+            } else{
+                $perdio = $perdio + 1;
+            }
+        // Revisa si el jugador es el jugador circulo
+        } elseif($nombreJugador == $colecJuegos[$i]["jugadorCirculo"]){
+            // Si es, determina si ganó
+            if($colecJuegos[$i]["puntosCirculo"] > $colecJuegos[$i]["puntosCruz"]){
+                $gano = $gano + 1;
+                $puntosAcum = $puntosAcum + $colecJuegos[$i]["puntosCirculo"];
+            // Si no ganó, determina si empató
+            } elseif($colecJuegos[$i]["puntosCirculo"] == $colecJuegos[$i]["puntosCruz"]){
+                $empato = $empato + 1;
+                $puntosAcum = $puntosAcum + $colecJuegos[$i]["puntosCirculo"];
+            // Si no ganó ni empató, perdió.
+            } else{
+                $perdio = $perdio + 1;
+            }
         }
     }
 
@@ -212,7 +232,7 @@ function resumenJugador($colecJuegos, $nombreJugador){
 function elegirSimbolo(){
     //string $simbolo, boolean $valorSimbolo;
 
-    // Inicialización de variablesW
+    // Inicialización de variables
     $valorSimbolo = false;
 
      do{  
@@ -364,9 +384,12 @@ do {
             echo "Ingrese el nombre del jugador: ";
             $nombreJugador = strtoupper(trim(fgets(STDIN)));
             $indicePrimeraVictoria = primeraVictoria($coleccionDeJuegos, $nombreJugador);
+
+            // Si es distinto de -1 (tiene alguna victoria), muestra el primer juego que ganó
             if($indicePrimeraVictoria <> -1){
                 mostrarJuego($coleccionDeJuegos, $indicePrimeraVictoria);
             } else{
+                // Sino el mensaje de que no tiene victorias
                 echo "El jugador " . $nombreJugador . " no ganó ningún juego.\n";
             }
 
