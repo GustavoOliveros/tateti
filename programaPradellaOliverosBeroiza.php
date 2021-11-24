@@ -11,9 +11,6 @@ include_once("tateti.php");
 /* Beroiza, Santiago. FAI 2594. Tecnicatura Universitaria en Desarrollo Web. santiago.beroiza@est.fi.uncoma.edu.ar. BeroizaSantiago */
 
 
-
-
-
 /**************************************/
 /***** DEFINICION DE FUNCIONES ********/
 /**************************************/
@@ -73,11 +70,11 @@ function seleccionarOpcion(){
 function mostrarJuego ($colecJuegos, $nj){
     echo "**********************\n";
     if ($colecJuegos[$nj]["puntosCruz"] > $colecJuegos[$nj]["puntosCirculo"]) {
-        echo "Juego TATETI: " . $nj + 1 . " (ganó X) \n";
+        echo "Juego TATETI: " . $nj . " (ganó X) \n";
     } elseif ($colecJuegos[$nj]["puntosCruz"] < $colecJuegos[$nj]["puntosCirculo"]) {
-        echo "Juego TATETI: " . $nj + 1 . " (ganó O) \n";
+        echo "Juego TATETI: " . $nj . " (ganó O) \n";
     } else {
-        echo "Juego TATETI: " . $nj + 1 . " (empate) \n";
+        echo "Juego TATETI: " . $nj . " (empate) \n";
     }
     echo "Jugador X: " . $colecJuegos[$nj]["jugadorCruz"] . " obtuvo " . $colecJuegos[$nj]["puntosCruz"] . " puntos. \n";
     
@@ -168,16 +165,22 @@ function primeraVictoria($colecJuegos, $nombreJug){
  * 7) Muestra resumen del jugador. (opcion 5)
  * @param array $colecJuegos
  * @param string $nombreJugador
+ * @return array arreglo asociativo
  */
 function resumenJugador($colecJuegos, $nombreJugador){
     //INTEGER $gano, $perdio, $empato, $puntosAcum, STRING $nombreJugador, ARRAY $resumen
+
+    // Inicialización de variables
     $numDeJuegos = count($colecJuegos);
     $gano = 0;
     $perdio = 0;
     $empato = 0;
     $puntosAcum = 0;
+
+    // Asignamos el parametro $nombre a la clave "nombre"
     $resumen["nombre"] = $nombreJugador;
 
+    // Hacemos recorrido exhaustivo del array para obtener todos los datos del jugador
     for($i=0; $i < $numDeJuegos; $i++){
         if($nombreJugador == $colecJuegos[$i]["jugadorCruz"] && $colecJuegos[$i]["puntosCruz"] > $colecJuegos[$i]["puntosCirculo"] || $nombreJugador == $colecJuegos[$i]["jugadorCirculo"] && $colecJuegos[$i]["puntosCruz"] < $colecJuegos[$i]["puntosCirculo"]){
             $gano = $gano + 1;
@@ -189,18 +192,14 @@ function resumenJugador($colecJuegos, $nombreJugador){
             $puntosAcum = $puntosAcum + 1;
         }
     }
+
+    //Asignamos los datos a sus respectivas claves y retornamos el arreglo
     $resumen ["juegosGanados"] = $gano;
     $resumen ["juegosPerdidos"] = $perdio;
     $resumen ["juegosEmpatados"] = $empato;
     $resumen ["puntosAcumulados"] = $puntosAcum;
-    
-    echo"**********************\n";
-    echo"Jugador: ".$resumen["nombre"]."\n";
-    echo"Ganó: ".$resumen["juegosGanados"]." juegos\n";
-    echo"Perdió: ".$resumen["juegosPerdidos"]." juegos\n";
-    echo"Empató: ".$resumen["juegosEmpatados"]." juegos\n";
-    echo"Total de puntos acumulados: ".$resumen["puntosAcumulados"]." puntos\n";
-    echo"**********************\n";
+
+    return $resumen;
 }
 
 /**
@@ -346,7 +345,7 @@ do {
             $indiceMaximo = count($coleccionDeJuegos);
             echo "Ingrese el número del juego que desea ver: ";
             $numeroJuego = solicitarNumeroEntre(0, $indiceMaximo);
-            mostrarJuego($coleccionDeJuegos, ($numeroJuego - 1));
+            mostrarJuego($coleccionDeJuegos, ($numeroJuego));
 
             break;
         case 3:
@@ -381,7 +380,7 @@ do {
             echo "**********************\n";
             // echo "Victorias totales: ". $vicTotales;
             // echo "\nVictorias del símbolo ". $simbolo . ": ". $vicSimbolo;
-            echo "\nPorcentaje de victorias de ". $simbolo . ": " . round($porcVictorias, 2)  . "%";
+            echo "Porcentaje de victorias de ". $simbolo . ": " . round($porcVictorias, 2)  . "%";
             echo "\n**********************\n";
             break;
         case 5:
@@ -390,80 +389,20 @@ do {
             echo "Ingrese el nombre del jugador: ";
             $nombreJugador = strtoupper(trim(fgets(STDIN))); 
             $resJugador = resumenJugador($coleccionDeJuegos, $nombreJugador);
+            
+            echo"**********************\n";
+            echo"Jugador: " . $resJugador["nombre"]."\n";
+            echo"Ganó: " . $resJugador["juegosGanados"]." juegos\n";
+            echo"Perdió: " . $resJugador["juegosPerdidos"]." juegos\n";
+            echo"Empató: " . $resJugador["juegosEmpatados"]." juegos\n";
+            echo"Total de puntos acumulados: " . $resJugador["puntosAcumulados"]." puntos\n";
+            echo"**********************\n";
             break;
         case 6:
             // Mostrar listado de juegos Ordenado por jugador O
-            $jugadoresConSimboloO = ordenarPorJugadoresO($coleccionDeJuegos);
-            echo $jugadoresConSimboloO;
-
+            ordenarPorJugadoresO($coleccionDeJuegos);
 
             break;
     }
 // Finaliza el programa si la funcion seleccionarOpcion retorna 7
 } while ($opcion != 7);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// EXTRA
-/*
-$coleccionDeJuegos = ordenarPorJugadoresO($coleccionDeJuegos);
-print_r($coleccionDeJuegos); */
-
-/* Instrucciones para probar modulos. Se puede reutilizar para el programa principal
-6)
-echo "Ingrese el nombre que desea buscar su primera victoria: \n";
-$nom = strtoupper(trim(fgets(STDIN)));
-
-$primVictoria = primeraVictoria($colecJuegos, $nom);
-
-if($primVictoria > -1){
-    echo "La primera victoria de " . $nom . " fue en la partida #" . $primVictoria;
-} else{
-    echo $nom . " no ganó ninguna partida.";
-}
-
-10)
-echo "***** Partidas ganadas *****\n";
-$simboloElegido = elegirSimbolo();
-$partGanadas = victoriasPorSimbolo($coleccionDeJuegos, $simboloElegido);
-echo $simboloElegido . " ganó " . $partGanadas . "\n";
-$resumen = resumenJugador($coleccionDeJuegos, "PEPE"); */
-
-// Mostramos menu
-/* $opcionDeMenu = seleccionarOpcion();
-
-// --arreglar posicion al implementar el switch 
-// El resultado de la función jugar se guarda y luego se agrega a la colección mediante agregarJuegos
-$juego = jugar();
-$coleccionDeJuegos = agregarJuegos($coleccionDeJuegos, $juego);
-mostrarJuego($coleccionDeJuegos);
-
-//Funcion de menu resumen (opcion 5)
-echo "Ingrese el nombre del jugador de quien desea obtener el resumen: \n";
-$resumNom = trim(fgets(STDIN));
-$resumen = resumenJugador($coleccionDeJuegos, $resumNom);
-
-//Funcion que ingresa X o O y lo devuelve
-$simbolo = elegirSimbolo();
-
-//Funcion que retona los jugadores que eligieron O
-$jugadoresConSimboloO = ordenarPorJugadoresO($coleccionDeJuegos);
-
-// print_r($coleccionDeJuegos);
-// --
-
-//print_r($coleccionDeJuegos);
-//imprimirResultado($juego);
-
-*/
