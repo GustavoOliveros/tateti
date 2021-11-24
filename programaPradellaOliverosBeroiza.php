@@ -92,7 +92,7 @@ function mostrarJuego ($colecJuegos, $nj){
 function agregarJuegos($colecJuegos, $juegoNuevo){
     // int $cantcolecJuegos, array $coleccionNueva
 
-    // Se obtiene la cantidad de elementos mediante la función count
+    // Se obtiene la cantidad de elementos mediante la función count (la función retorna la cantidad de elementos del arreglo)
     $cantColecJuegos = count($colecJuegos);
 
     // Se agrega el juego nuevo en la posición siguiente a la última (obtenida por la función count)
@@ -142,19 +142,22 @@ function esGanador($colecJuegos, $numJuego, $nombreJug){
  * @return int retorna indice del juego o -1 si el jugador no ganó nada
  */
 function primeraVictoria($colecJuegos, $nombreJug){
-    // int $cont, $indice, $n, boolean $bandera
+    // int $cont, $indice, $cantJuegos, boolean $bandera
 
     // Inicialización de variables
-    $n = count($colecJuegos);
+    $cantJuegos = count($colecJuegos);
     $cont = 0;
 
-    while($cont < $n && !esGanador($colecJuegos, $cont, $nombreJug)){
+    // Recorrido parcial. Se va detener cuando encuentra la primera victoria
+    while($cont < $cantJuegos && !esGanador($colecJuegos, $cont, $nombreJug)){
         $cont++;
     }
 
-    if($cont < $n){
+    // Si hay menor cantidad de ciclos que juegos (encontró su primera victoria) retorna el contador
+    if($cont < $cantJuegos){
         $indice = $cont;
     } else{
+        // Sino retorna -1
         $indice = -1;
     }
 
@@ -203,20 +206,24 @@ function resumenJugador($colecJuegos, $nombreJugador){
 }
 
 /**
- * 8) Funcion que pide y valida que se ingrese un simbolo X o O
+ * 8) Funcion que pide y verifica que se ingrese un simbolo X o O
  * @return string
  */
 function elegirSimbolo(){
     //string $simbolo, boolean $valorSimbolo;
+
+    // Inicialización de variablesW
     $valorSimbolo = false;
+
      do{  
         echo"Ingrese un simbolo 'X' o 'O': ";
-        $simbolo = strtoupper(trim(fgets(STDIN)));
+        $simbolo = strtoupper(trim(fgets(STDIN))); //strtoupper convierte a todos los carácteres en mayúsculas
         if($simbolo  == "X" || $simbolo == "O"){
             $valorSimbolo = true;
         }else{
-            echo"Simbolo invalido\n";
+            echo"Simbolo inválido.\n";
         }
+    // Se repetirá hasta que el usuario ingrese X o O
     }while ($valorSimbolo == false);
     
     return $simbolo;   
@@ -229,22 +236,26 @@ function elegirSimbolo(){
  * @return integer
  */
 function totalGanadas($colecJuegos){
-    // int $acumG $nJueg $i
+    // int $contG, $nJueg, $i
+
+    // Inicialización de variables y obtención de la cantidad de elementos mediante count
     $nJueg= count($colecJuegos);
-    $acumG = 0;
-  
+    $contG = 0;
+
+    // Recorrido exhaustivo. Revisará todas las partidas y sumará uno por cada victoria
     for ($i = 0; $i<$nJueg; $i++){
         if ($colecJuegos[$i]["puntosCruz"] > $colecJuegos[$i]["puntosCirculo"]){
-            $acumG++;
+            $contG++;
         } elseif($colecJuegos[$i]["puntosCruz"] < $colecJuegos[$i]["puntosCirculo"]){
-            $acumG++;
+            $contG++;
         }
     }
-    return $acumG;
+
+    return $contG;
 }
 
 /**
- * 10) Retorna la cantidad de victoria del símbolo de entrada
+ * 10) Retorna la cantidad de victorias del símbolo de entrada
  * @param array $colecJuegos
  * @param string $simboloAVerificar (X/O)
  * @return integer
@@ -271,6 +282,7 @@ function victoriasPorSimbolo($colecJuegos, $simboloAVerificar){
             }
         }
     }
+
     return $juegosGanados;
 }
 
@@ -300,6 +312,7 @@ function ordenarPorJugadoresO($colecJuegos){
     // Dicha función también mantiene las asociación de índices.
     uasort($colecJuegos, "esMayorO");
 
+    // print_r muestra en pantalla información legible acerca de una variable 
     print_r($colecJuegos);
 }
 
@@ -312,11 +325,8 @@ function ordenarPorJugadoresO($colecJuegos){
 INTEGER $opcion, $indiceMaximo, $numeroJuego, $indicePrimeraVictoria, $vicTotales, $vicSimbolo
 FLOAT $porcVictorias
 STRING $nombreJugador, $simbolo
-ARRAY $coleccionDeJuegos, $juego
+ARRAY $coleccionDeJuegos, $juego, $resJugador
 */
-
-//Inicialización de variables:
-
 
 //Proceso:
 
@@ -342,17 +352,17 @@ do {
         case 2:
             // Mostrar un Juego
             echo "\n************  Mostrar un Juego  *************\n";
-            $indiceMaximo = count($coleccionDeJuegos);
-            echo "Ingrese el número del juego que desea ver: ";
+            $indiceMaximo = count($coleccionDeJuegos) - 1;
+            echo "Ingrese el número del juego que desea ver (mayor o igual a 0): ";
             $numeroJuego = solicitarNumeroEntre(0, $indiceMaximo);
-            mostrarJuego($coleccionDeJuegos, ($numeroJuego));
+            mostrarJuego($coleccionDeJuegos, $numeroJuego);
 
             break;
         case 3:
             // Mostrar el primer juego ganador
             echo "\n************ Primer Juego Ganado ************\n";
             echo "Ingrese el nombre del jugador: ";
-            $nombreJugador = strtoupper(trim(fgets(STDIN))); //strtoupper convierte a todos los carácteres en mayúsculas
+            $nombreJugador = strtoupper(trim(fgets(STDIN)));
             $indicePrimeraVictoria = primeraVictoria($coleccionDeJuegos, $nombreJugador);
             if($indicePrimeraVictoria <> -1){
                 mostrarJuego($coleccionDeJuegos, $indicePrimeraVictoria);
@@ -377,19 +387,20 @@ do {
             }
 
             // Visualización en pantalla
-            echo "**********************\n";
-            // echo "Victorias totales: ". $vicTotales;
-            // echo "\nVictorias del símbolo ". $simbolo . ": ". $vicSimbolo;
-            echo "Porcentaje de victorias de ". $simbolo . ": " . round($porcVictorias, 2)  . "%";
+            echo "Porcentaje de victorias de ". $simbolo . ": " . round($porcVictorias, 2)  . "%"; // round redondea un valor float a un cantidad de decimales especifico
             echo "\n**********************\n";
+
             break;
         case 5:
             // Mostrar resumen de Jugador
             echo "\n******** Resumen de jugador *******\n";
+
+            // Obtención del resumen (resJugador)
             echo "Ingrese el nombre del jugador: ";
             $nombreJugador = strtoupper(trim(fgets(STDIN))); 
             $resJugador = resumenJugador($coleccionDeJuegos, $nombreJugador);
             
+            // Visualización en pantalla
             echo"**********************\n";
             echo"Jugador: " . $resJugador["nombre"]."\n";
             echo"Ganó: " . $resJugador["juegosGanados"]." juegos\n";
@@ -397,9 +408,11 @@ do {
             echo"Empató: " . $resJugador["juegosEmpatados"]." juegos\n";
             echo"Total de puntos acumulados: " . $resJugador["puntosAcumulados"]." puntos\n";
             echo"**********************\n";
+
             break;
         case 6:
             // Mostrar listado de juegos Ordenado por jugador O
+            echo "\n** Listado de juegos ordenado por jugador O **\n";
             ordenarPorJugadoresO($coleccionDeJuegos);
 
             break;
