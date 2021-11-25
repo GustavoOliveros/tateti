@@ -308,8 +308,8 @@ function victoriasPorSimbolo($colecJuegos, $simboloAVerificar){
 
 /**
  * 11) Función de comparación para ordenar jugadorCirculo alfabéticamente
- * @param string $valorA
- * @param string $valorB
+ * @param array $valorA
+ * @param array $valorB
  * @return int 1 si es mayor, 0 si es igual, -1 si es menor
  */
 function esMayorO($valorA, $valorB){
